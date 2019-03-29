@@ -16,3 +16,4 @@ The newly developed accounting program includes the following functions:
 6. to forecast the income and expenses for the next time period based on the previous financial records stored in the system.
 
 ## Scope
+This system targets both personal and commercial accounting. It monitors your personal, family budget or cash flow of your business. For the assumptions and limitations, we assume that there is only one user. All of their transactions are paid in a lump sum instead of by installments. It supports multiple currencies and units.
