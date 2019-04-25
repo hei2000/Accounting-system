@@ -104,7 +104,7 @@ void add(record * rec){
   record * after = findpos(input.substr(0,8),rec);
   insert(after, input);
   
-void (string keyitem, string key, record * rec,record *ptr[]){
+void print_ptr(string keyitem, string key, record * rec,record *ptr[]){
   int count=0;
   if (rec->keyitem==key){
     cout<<count<<": "<<rec->date<<" "<<rec->amount<<" "<<rec->type<<" "<<rec->account<<endl;
