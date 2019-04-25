@@ -51,5 +51,6 @@ int main(){
     }
   }
   savedata();                           //file output
+  delete();                             //avoid memory leakage
   return 0;
   }
