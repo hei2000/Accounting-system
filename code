@@ -74,14 +74,27 @@ record * findpos(string date,record * rec){
   record * current = rec;
   int intdate = atoi(date.c_str())
   while (current != NULL){
-  if intdate<atoi((current->next->date).c_str()){
-    return current;
+  if (intdate>atoi((current->date).c_str())){
+    if (current->next==NULL){
+      return current;
+    }
+    else{
+      current=current->next;
+      }
     }
   else{
-    current=current->next;
+    return current;
     }
   }
   return current
+}
+
+void insert(record * after,string input){
+  record * tem = new record;
+  istringstream iss(str);
+  iss>>tem->date>>tem->amount>>tem->type>>tem->account;
+  tem->next=after->next;
+  after->next=tem;
 }
 
 void add(record * rec){
@@ -89,8 +102,66 @@ void add(record * rec){
   cout<<"Please enter date, amount, type of expense and account according to the format below"<<endl;
   cout<<"YYYYMMDD AMOUNT TYPE ACCOUNT"<<endl;
   record * after = findpos(input.substr(0,8),rec);
-  insert(record * after, input);
+  insert(after, input);
+  
+void (string keyitem, string key, record * rec,record *ptr[]){
+  int count=0;
+  if (rec->keyitem==key){
+    cout<<count<<": "<<rec->date<<" "<<rec->amount<<" "<<rec->type<<" "<<rec->account<<endl;
+    ptr[count]=-1;                                                                               //delete head
+    count++;
+  }
+  record * current=rec;
+  while (current->next!=NULL){
+    if (current->next->keyitem==key){
+      cout<<count<<": "<<current->next->date<<" "<<current->next->amount<<" "<<current->next->type<<" "<<current->next->account<<endl;
+      ptr[count]=current;
+      count++;
+      }
+    current=current->next;
+  }
+  if (current!=rec){
+  current=current->next;
+  if (current->keyitem==key){
+     cout<<count<<": "<<current->date<<" "<<current->amount<<" "<<current->type<<" "<<current->account;
+     ptr[count]=-2                                                                              //delete tail
+    }
+  }
+}
 
+void delete_rec(record * after,record *&rec){
+  if (after==-1){
+    record * tem=rec;
+    rec=rec->next;
+    delete tem;
+  }
+  if (after==-2){
+    while (current->next!=NULL){
+      current=current->next;
+    }
+    delete current;
+  }
+  if (after!=-1 && after !=-2){
+    record * tem = after->next;
+    after->next=tem->next;
+    delete tem;
+  }
+}
+
+void delete(record * rec){
+  string keyitem, key;
+  cout<<"Please enter a key item for searching"<<endl<<"1: Date\n2: Amount\n3: Type\n4: Account";
+  cin>>keyitem;
+  cout<<"input sth";
+  cin>>key;
+  record *ptr[300];                              //use dynamic memory if possible
+  print_ptr(keyitem,key,rec,ptr);
+  cout<<"number you want to delete"<<endl;
+  int number;
+  cin>>number;
+  delete_rec(ptr[number],rec);
+  
+  
 int main(){
   record * rec = NULL;                                //dynamic memory management
   string name=" ",password=" ";
@@ -104,13 +175,13 @@ int main(){
   cin>>choice;
   switch (choice){
   case 1:
-    add();                              //exchange rate file input
+    add(rec);
     break;
   case 2:
-    delete();
+    delete(rec);
     break;
   case 3:
-    edit();
+    edit();                                     //combine add(rec) and delete(rec)
     break;
   case 4:
     view();
