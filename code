@@ -12,17 +12,27 @@ void printmenu(){
 
 }
 
+void extend_record_size(){
+
+}
+
 int main(){
   printmenu();
-  int choice;
+  int choice,record_size=5,size_counter=0;
   cin>>choice;
+  
+  record * rec = new record [5];        //dynamic memory management
+  
+  
   while (choice!="END"){
   switch (choice){
   case 1:
-    add();
+    add();                              //exchange rate file input
+    size_counter++;
     break;
   case 2:
     delete();
+    size_counter--;
     break;
   case 3:
     edit();
