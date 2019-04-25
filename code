@@ -25,11 +25,9 @@ int main(){
   switch (choice){
   case 1:
     add();                              //exchange rate file input
-    size_counter++;
     break;
   case 2:
     delete();
-    size_counter--;
     break;
   case 3:
     edit();
