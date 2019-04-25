@@ -7,22 +7,17 @@ struct record{
   string date;
   string type;
   string account;
+  record * next;
 };
 
 void printmenu(){
 
-}
-
-void extend_record_size(){
-
-}
-
 int main(){
   printmenu();
-  int choice,record_size=5,size_counter=0;
+  int choice;
   cin>>choice;
   
-  record * rec = new record [5];        //dynamic memory management
+  record * rec = new record;            //dynamic memory management
   
   
   while (choice!="END"){
