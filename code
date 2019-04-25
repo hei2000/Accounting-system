@@ -11,44 +11,59 @@ struct record{
 };
 
 void printmenu(){
+  cout << "Welcome to your accounting system!\n\n"
+    << "************** Menu **************\n\n"
+    << "1: Add income and expenses records\n"
+    << "2: Delete records\n"
+    << "3: Edit records\n"
+    << "4: View previous records\n"
+    << "5: Generate statistical report\n"
+    << "6: Set budget\n"
+    << "7: Generate financial forecast\n\n"
+    << "0: Exit\n\n"
+    << "**********************************\n\n"
+    << "Enter your option: ";
+}
 
 int main(){
   getdata();                          //file input
   printmenu();
   int choice;
-  cin>>choice;
+  cin >> choice;
   
   record * rec = new record;            //dynamic memory management
   
   
-  while (choice!="END"){
-  switch (choice){
-  case 1:
-    add();                              //exchange rate file input
-    break;
-  case 2:
-    delete();
-    break;
-  case 3:
-    edit();
-    break;
-  case 4:
-    view();
-    break;
-  case 5:
-    report();
-    break;
-  case 6:
-    budget();
-    break;
-  case 7:
-    forecast();
-    break;
-  default:
-    cout<<"invalid input! Please input again!"<<endl;
+  while (choice!=0){
+    switch (choice){
+    case 1:
+      add();                              //exchange rate file input
+      break;
+    case 2:
+      delete();
+      break;
+    case 3:
+      edit();
+      break;
+    case 4:
+      view();
+      break;
+    case 5:
+      report();
+      break;
+    case 6:
+      budget();
+      break;
+    case 7:
+      forecast();
+      break;
+    default:
+      cout << "Invalid input! Please input again!" << endl;
     }
+    printmenu();
+    cin >> choice;
   }
   savedata();                           //file output
   delete();                             //avoid memory leakage
   return 0;
-  }
+ }
