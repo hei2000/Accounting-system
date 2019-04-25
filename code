@@ -12,6 +12,30 @@ struct record{
   record * next;
 };
 
+string getdata(string name,record *& rec){
+  record * tail;
+  string password,str;
+  ifstream fin;
+  fin.open(name.c_str());
+  fin>>password;
+  int counter=0;
+  while (getline(fin,str)){
+    istringstream iss(str);
+    record * p = new record;
+    iss>>p->date>>p->amount>>p->type>>p->account;
+    p->next=NULL;
+    if (rec==NULL){
+      rec=p;
+      tail=p;
+      }
+    else{
+      tail->next=p;
+      tail=p;
+      }
+    }
+  return password;
+  }
+
 void login(string * name, string * password,record * rec){
   int number;
   cout<<"Enter 1 to login\nEnter 2 to create new account\n;
@@ -37,28 +61,6 @@ void login(string * name, string * password,record * rec){
     cout<<"Please enter your password!";
     cin>>password;
     }
-  }
-  
-string getdata(string name,record *& rec){
-  record * tail;
-  string password,str;
-  ifstream fin;
-  fin.open(name.c_str());
-  fin>>password;
-  int counter=0;
-  while (getline(fin,str)){
-    istringstream iss(str);
-    record * p = new record;
-    iss>>p->date>>p->amount>>p->type>>p->account;
-    p->next=NULL;
-    if (rec==NULL){
-      rec=p;
-      tail=p;
-      }
-    else{
-      tail->next=p;
-      tail=p;
-      }
   }
 
 void printmenu(){
