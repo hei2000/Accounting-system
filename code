@@ -16,4 +16,33 @@ int main(){
   printmenu();
   int choice;
   cin>>choice;
-  switch
+  while (choice!="END"){
+  switch (choice){
+  case 1:
+    add();
+    break;
+  case 2:
+    delete();
+    break;
+  case 3:
+    edit();
+    break;
+  case 4:
+    view();
+    break;
+  case 5:
+    report();
+    break;
+  case 6:
+    budget();
+    break;
+  case 7:
+    forecast();
+    break;
+  default:
+    cout<<"invalid input! Please input again!"<<endl;
+    }
+  }
+  cout<<
+  return 0;
+  }
