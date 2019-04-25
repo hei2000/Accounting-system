@@ -13,6 +13,7 @@ struct record{
 void printmenu(){
 
 int main(){
+  getdata();                          //file input
   printmenu();
   int choice;
   cin>>choice;
@@ -49,6 +50,7 @@ int main(){
     cout<<"invalid input! Please input again!"<<endl;
     }
   }
+  savedata();                           //file output
   cout<<
   return 0;
   }
