@@ -39,8 +39,8 @@ void login(string * name, string * password,record * rec){
     }
   }
   
-string getdata(string name,record * rec){
-  record * current=rec;
+string getdata(string name,record *& rec){
+  record * tail;
   string password,str;
   ifstream fin;
   fin.open(name.c_str());
@@ -48,14 +48,23 @@ string getdata(string name,record * rec){
   int counter=0;
   while (getline(fin,str)){
     istringstream iss(str);
-    iss>>current->date>>current->amount>>current->type>>current->account;
-    
+    record * p = new record;
+    iss>>p->date>>p->amount>>p->type>>p->account;
+    p->next=NULL;
+    if (rec==NULL){
+      rec=p;
+      tail=p;
+      }
+    else{
+      tail->next=p;
+      tail=p;
+      }
   }
 
 void printmenu(){
 
 int main(){
-  record * rec = new record;                                //dynamic memory management
+  record * rec = NULL;                                //dynamic memory management
   string name=" ",password=" ";
   login(name,password,rec);
   
