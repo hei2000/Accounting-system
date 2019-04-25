@@ -1,2 +1,19 @@
 #include <iostream>
 using namespace std;
+
+struct record{
+  int amount;
+  string date;
+  string type;
+  string account;
+};
+
+void printmenu(){
+
+}
+
+int main(){
+  printmenu();
+  int choice;
+  cin>>choice;
+  switch
