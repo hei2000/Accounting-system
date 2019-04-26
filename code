@@ -29,6 +29,7 @@ string getdata(string name,record *& rec){
   while (getline(fin,str)){
     istringstream iss(str);
     record * p = new record;
+    record * tail;
     iss>>p->date>>p->amount>>p->type>>p->account;
     p->next=NULL;
     if (rec==NULL){
@@ -43,7 +44,7 @@ string getdata(string name,record *& rec){
   return password;
   }
 
-void login(string * name, string * password,record * rec){
+void login(string & name, string & password,record *& rec){
   int number;
   cout<<"Enter 1 to login\nEnter 2 to create new account\n";
   cin>>number;
@@ -52,10 +53,11 @@ void login(string * name, string * password,record * rec){
     cin>>number;
     }
   if (number==1){
-    cout<<"Please enter your user name!";
+    cout<<"Please enter your user name!"<<endl;
     cin>>name;
+    string check_password;
     check_password=getdata(name,rec);                                  //file input
-    cout<<"Please enter your password!";
+    cout<<"Please enter your password!"<<endl;
     cin>>password;
     while (check_password!=password){
       cout<<"Wrong password! Please enter your password again!"<<endl;
@@ -63,9 +65,9 @@ void login(string * name, string * password,record * rec){
       }
     }
   if (number==2){
-    cout<<"Please enter your user name!";
+    cout<<"Please enter your user name!"<<endl;
     cin>>name;                                                //open new file here???
-    cout<<"Please enter your password!";
+    cout<<"Please enter your password!"<<endl;
     cin>>password;
     }
   }
@@ -166,7 +168,7 @@ void delete(record * rec){
 
 //print record within one month instead of all record???
 void view(record * rec){
-	cout<<left<<setw(10)<<"Date"<<setw(10)<<"Amount"<<setw(10)<<"Type"<<setw(10)<<"Account"<endl;
+	cout<<left<<setw(10)<<"Date"<<setw(10)<<"Amount"<<setw(10)<<"Type"<<setw(10)<<"Account"<<endl;
 	record * current = rec;
 	while (current!=NULL){
 		cout<<setw(10)<<current->date<<setw(10)<<current->amount<<setw(10)<<current->type<<setw(10)<<current->account<<endl;
@@ -180,36 +182,36 @@ int main(){
   login(name,password,rec);
   
   printmenu();
-  string choice;
+  char choice;
   
   cin>>choice;
-  while (choice!="END"){
-  cin>>choice;
+  while (choice!='N'){
   switch (choice){
-  case "1":
+  case '1':
     add(rec);
     break;
-  case "2":
+  case '2':
     delete(rec);
     break;
-  case "3":
+  case '3':
     edit();                                     //combine add(rec) and delete(rec)
     break;
-  case "4":
+  case '4':
     view(rec);
     break;
-  case "5":
+  case '5':
     report();
     break;
-  case "6":
+  case '6':
     budget();
     break;
-  case "7":
+  case '7':
     forecast();
     break;
   default:
     cout<<"invalid input! Please input again!"<<endl;
     }
+  cin>>choice;
   }
   savedata();                           //file output
   deletedynamic();                       //avoid memory leakage
