@@ -4,7 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include <iomanip>
-#include "account.h"
+#include <ctime>
 using namespace std;
 
 struct record{
@@ -14,6 +14,22 @@ struct record{
   string account;
   record * next;
 };
+
+//return current date in the form of YYYYMMDD
+string gettime(){
+	time_t now = time(0);
+	tm *datetm = localtime(&now);
+	string date = to_string(1900+datetm->tm_year);
+	if ((1+datetm->tm_mon)<10){
+		date = date + "0";
+		}
+	date = date + to_string(1+datetm->tm_mon);
+	if (datetm->tm_mday<10){
+		date = date + "0";
+		}
+	date = date + to_string(datetm->tm_mday);
+	return date;
+}
 
 //get data from the user's file and store it in a linked list
 //return password
@@ -203,7 +219,8 @@ int main(){
     delete_(rec);
     break;
   case '3':
-    edit();                                     //combine add(rec) and delete(rec)
+    delete_(rec);
+    add(rec);						//combine add(rec) and delete(rec)
     break;
   case '4':
     view(rec);
