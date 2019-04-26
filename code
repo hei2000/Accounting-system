@@ -40,6 +40,10 @@ string getdata(string name,record *& rec){
   ifstream fin;
   name = name + ".txt";
   fin.open(name.c_str());
+  if (fin.fail()){
+  	cout<<"Failed to open name. Cannot get data from server."<<endl;
+	exit(1);
+	}
   getline(fin,password);
   int counter=0;
   while (getline(fin,str)){
@@ -232,6 +236,31 @@ void forecast(record * rec){
 		expected_sum=sum/daypassed*30;
 	cout<<"expect use "<<expected_sum<<endl;
 }
+
+void savedata(record * rec,string name,string password){
+	name = name + ".txt";
+	ofstream fout;
+	fout.open(name.c_str());
+	if (fout.fail()){
+		cout<<"Failed to open name. Cannot save data to the server"<<endl;
+		exit(1);
+	}
+	fout<<password<<endl;
+	record * current = rec;
+	while (current != NULL){
+		fout<<current->date<<" "<<current->amount<<" "<<current->type<<" "<<current->account<<endl;
+		current=current->next;
+	}
+}
+
+void delete_all(record *&rec){
+	record * tem = rec;
+	while (tem!=NULL){
+		rec=tem->next;
+		delete tem;
+		tem=rec;
+	}
+}
   
 int main(){
   record * rec = NULL;                                //dynamic memory management
@@ -266,7 +295,7 @@ int main(){
     cin>>budget;
     break;
   case '7':
-    forecast(rec);
+    forecast(rec);					//can forecase within year
     break;
   case 'N':
     cout<<"Bye!"<<endl;
@@ -276,7 +305,7 @@ int main(){
     }
   check_budget(rec);
   }
-  savedata();                           //file output
-  deletedynamic();                       //avoid memory leakage
+  savedata(rec,name,password);                           //file output
+  delete_all(rec);                       //avoid memory leakage
   return 0;
   }
