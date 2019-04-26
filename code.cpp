@@ -76,8 +76,8 @@ void login(string & name, string & password,record *& rec_X,record *& rec_I){
     cout<<"Please enter your user name!"<<endl;
     cin>>name;
     string check_password;
-    check_password=getdata(name,rec_X,X);                                  //file input
-    getdata(name,rec_I,I);
+    check_password=getdata(name,rec_X,"X");                                  //file input
+    getdata(name,rec_I,"I");
     cout<<"Please enter your password!"<<endl;
     cin>>password;
     while (check_password!=password){
@@ -105,7 +105,7 @@ void printmenu(){
     << "7: Generate financial forecast\n\n"
     << "N: Exit\n\n"
     << "**********************************\n\n"
-    << "Enter your option: ";	
+    << "Enter your option: ";
 }
 
 record * findpos(string date,record * rec){
@@ -169,7 +169,7 @@ void add(record * rec){
     insert(after, input);
   }
 }
-  
+
 int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail){
   int count=0;
   if (rec->date==key || rec->amount==key || rec->type==key || rec->account==key){
@@ -255,17 +255,17 @@ int sum_of_this_month(record * rec){
 			total+=atoi((current->amount).c_str());
 		}
 	}
-	rerturn total
+	return total;
 }
 
-void check_budget(record * rec){
+void check_budget(record * rec,int budget){
 	if (sum_of_this_month(rec)>budget){
 		cout<<"overspend"<<endl;
 	}
 }
 
 void forecast(record * rec){
-	int sum=sum_of_this_month(rec_X);
+	int sum=sum_of_this_month(rec);
 	int daypassed=atoi((getdate().substr(6,2)).c_str());
 	double expected_sum;
 	//check how many days in this month. ignore leap year
@@ -302,14 +302,15 @@ void delete_all(record *&rec){
 		tem=rec;
 	}
 }
-  
+
 int main(){
   record * rec_X = NULL;                                //dynamic memory management
   record * rec_I = NULL;
   string name=" ",password=" ";
+  char X_I;
   int budget=-1;
   login(name,password,rec_X,rec_I);
-  
+
   printmenu();
   char choice;
   while (choice!='N'){
@@ -317,21 +318,18 @@ int main(){
   cin>>choice;
   switch (choice){
   case '1':
-    char X_I;
     cout<<"1: Expense\n2: Income\n";
     cin >> X_I;
     if (X_I=='1') add(rec_X);
     if (X_I=='2') add(rec_I);
     break;
   case '2':
-    char X_I;
     cout<<"1: Expense\n2: Income\n";
     cin >> X_I;
     if (X_I=='1') delete_(rec_X);
     if (X_I=='2') delete_(rec_I);
     break;
   case '3':
-    char X_I;
     cout<<"1: Expense\n2: Income\n";
     cin >> X_I;
     if (X_I=='1'){
@@ -361,14 +359,14 @@ int main(){
     break;
   case 'N':
     cout<<"Bye!"<<endl;
-    break
+    break;
   default:
     cout<<"invalid input! Please input again!"<<endl;
     }
-  check_budget(rec_X);
+  check_budget(rec_X,budget);
   }
-  savedata(rec_X,name,password,X);                           //file output
-  savedata(rec_I,name,password,I);
+  savedata(rec_X,name,password,"X");                           //file output
+  savedata(rec_I,name,password,"I");
   delete_all(rec_X);                    		   //avoid memory leakage
   delete_all(rec_I);
   return 0;
