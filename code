@@ -16,7 +16,7 @@ struct record{
 };
 
 //return current date in the form of YYYYMMDD
-string gettime(){
+string getdate(){
 	time_t now = time(0);
 	tm *datetm = localtime(&now);
 	string date = to_string(1900+datetm->tm_year);
@@ -200,10 +200,43 @@ void view(record * rec){
 		current=current->next;
 	}
 }
+
+int sum_of_this_month(record * rec){
+	string date=getdate();
+	int total=0;
+	record * current = rec;
+	while (current!=NULL){
+		if ((current->date).substr(0,6)==date.substr(0,6)){
+			total+=atoi((current->amount).c_str());
+		}
+	}
+	rerturn total
+}
+
+void check_budget(record * rec){
+	if (sum_of_this_month(rec)>budget){
+		cout<<"overspend"<<endl;
+	}
+}
+
+void forecast(record * rec){
+	int sum=sum_of_this_month(rec);
+	int daypassed=atoi((getdate().substr(6,2)).c_str());
+	double expected_sum;
+	//check how many days in this month. ignore leap year
+	string month=getdate().substr(4,2);
+	if (month=="02") expected_sum=sum/daypassed*28;
+	if (month=="01" || month=="03" || month=="05" || month=="07" || month=="08" || month=="10" || month=="12")
+		expected_sum=sum/daypassed*31;
+	if (month=="04" || month=="06" || month=="09" || month=="11")
+		expected_sum=sum/daypassed*30;
+	cout<<"expect use "<<expected_sum<<endl;
+}
   
 int main(){
   record * rec = NULL;                                //dynamic memory management
   string name=" ",password=" ";
+  int budget=-1;
   login(name,password,rec);
   
   printmenu();
@@ -229,10 +262,11 @@ int main(){
     report();
     break;
   case '6':
-    budget();
+    cout<<"Please input the budget of this month"<<endl;
+    cin>>budget;
     break;
   case '7':
-    forecast();
+    forecast(rec);
     break;
   case 'N':
     cout<<"Bye!"<<endl;
@@ -240,6 +274,7 @@ int main(){
   default:
     cout<<"invalid input! Please input again!"<<endl;
     }
+  check_budget(rec);
   }
   savedata();                           //file output
   deletedynamic();                       //avoid memory leakage
