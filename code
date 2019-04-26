@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
+#include <iomanip>
 #include "account.h"
 using namespace std;
 
@@ -21,8 +22,9 @@ string getdata(string name,record *& rec){
   record * tail;
   string password,str;
   ifstream fin;
+  name = name + ".txt";
   fin.open(name.c_str());
-  fin>>password;
+  getline(fin,password);
   int counter=0;
   while (getline(fin,str)){
     istringstream iss(str);
@@ -160,7 +162,17 @@ void delete(record * rec){
   int number;
   cin>>number;
   delete_rec(ptr[number],rec);
-  
+}
+
+//print record within one month instead of all record???
+void view(record * rec){
+	cout<<left<<setw(10)<<"Date"<<setw(10)<<"Amount"<<setw(10)<<"Type"<<setw(10)<<"Account"<endl;
+	record * current = rec;
+	while (current!=NULL){
+		cout<<setw(10)<<current->date<<setw(10)<<current->amount<<setw(10)<<current->type<<setw(10)<<current->account<<endl;
+		current=current->next;
+	}
+}
   
 int main(){
   record * rec = NULL;                                //dynamic memory management
@@ -184,7 +196,7 @@ int main(){
     edit();                                     //combine add(rec) and delete(rec)
     break;
   case 4:
-    view();
+    view(rec);
     break;
   case 5:
     report();
@@ -200,6 +212,6 @@ int main(){
     }
   }
   savedata();                           //file output
-  delete();                             //avoid memory leakage
+  deletedynamic();                       //avoid memory leakage
   return 0;
   }
