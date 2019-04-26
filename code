@@ -109,16 +109,16 @@ void add(record * rec){
   insert(after, input);
 }
   
-void print_ptr(string keyitem, string key, record * rec,record *ptr[]){
+int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail){
   int count=0;
-  if (rec->keyitem==key){
+  if (rec->date==key || rec->amount==key || rec->type==key || rec->account==key){
     cout<<count<<": "<<rec->date<<" "<<rec->amount<<" "<<rec->type<<" "<<rec->account<<endl;
-    ptr[count]=-1;                                                                               //delete head
+    ptr[count]=head;                                                                               //delete head
     count++;
   }
   record * current=rec;
-  while (current->next!=NULL){
-    if (current->next->keyitem==key){
+  while (current->next->next!=NULL){
+    if (current->next->date==key || current->next->amount==key || current->next->type==key || current->next->account==key){
       cout<<count<<": "<<current->next->date<<" "<<current->next->amount<<" "<<current->next->type<<" "<<current->next->account<<endl;
       ptr[count]=current;
       count++;
@@ -127,44 +127,52 @@ void print_ptr(string keyitem, string key, record * rec,record *ptr[]){
   }
   if (current!=rec){
   current=current->next;
-  if (current->keyitem==key){
-     cout<<count<<": "<<current->date<<" "<<current->amount<<" "<<current->type<<" "<<current->account;
-     ptr[count]=-2                                                                              //delete tail
+  if (current->date==key || current->amount==key || current->type==key || current->account==key){
+     cout<<count<<": "<<current->date<<" "<<current->amount<<" "<<current->type<<" "<<current->account<<endl;
+     ptr[count]=tail;
+     count++;                                                                              //delete tail
     }
   }
+  return count;
 }
 
-void delete_rec(record * after,record *&rec){
-  if (after==-1){
+void delete_rec(record * after,record *&rec,record * head,record * tail){
+  if (after==head){
     record * tem=rec;
     rec=rec->next;
     delete tem;
   }
-  if (after==-2){
-    while (current->next!=NULL){
+  if (after==tail){
+    record * current=rec;
+    while (current->next->next!=NULL){
       current=current->next;
     }
-    delete current;
+    record * tem=current->next;
+    current->next=NULL;
+    delete tem;
   }
-  if (after!=-1 && after !=-2){
+  if (after!=head && after !=tail){
     record * tem = after->next;
     after->next=tem->next;
     delete tem;
   }
 }
 
-void delete(record * rec){
-  string keyitem, key;
-  cout<<"Please enter a key item for searching"<<endl<<"1: Date\n2: Amount\n3: Type\n4: Account";
-  cin>>keyitem;
-  cout<<"input sth";
-  cin>>key;
+void delete_(record *& rec){
+  record tem1,tem2;
+  record * head=&tem1;
+  record * tail=&tem2;
+  string keyword;
+  cout<<"Please enter a key word for searching"<<endl;
+  cin>>keyword;
   record *ptr[300];                              //use dynamic memory if possible
-  print_ptr(keyitem,key,rec,ptr);
-  cout<<"number you want to delete"<<endl;
-  int number;
-  cin>>number;
-  delete_rec(ptr[number],rec);
+  if (print_ptr(keyword,rec,ptr,head,tail)!=0){
+    cout<<"number you want to delete"<<endl;
+    int number;
+    cin>>number;
+    delete_rec(ptr[number],rec,head,tail);
+  }
+  else cout<<"Not found!"<<endl;
 }
 
 //print record within one month instead of all record???
@@ -185,13 +193,14 @@ int main(){
   printmenu();
   char choice;
   while (choice!='N'){
+  cout<<"input your choice"<<endl;
   cin>>choice;
   switch (choice){
   case '1':
     add(rec);
     break;
   case '2':
-    delete(rec);
+    delete_(rec);
     break;
   case '3':
     edit();                                     //combine add(rec) and delete(rec)
@@ -209,7 +218,7 @@ int main(){
     forecast();
     break;
   case 'N':
-    cout<<"Bye!"
+    cout<<"Bye!"<<endl;
     break
   default:
     cout<<"invalid input! Please input again!"<<endl;
