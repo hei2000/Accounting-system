@@ -156,7 +156,10 @@ void add(record * rec){
       cout<<"Failed to open name. Cannot get data from file." << endl;
     	exit(1);
     }
-    // not yet finish
+    while (getline(fin, input)){
+      record * after = findpos(input.substr(0,8),rec);
+      insert(after, input);
+    }
     fin.close();
   }
   else if (option == '2') {
