@@ -43,4 +43,4 @@ In your complier, enter the following command:
 
 ./(name)
 
-The program should then be executing and accepting user input immediately.
+The program should then be executing in your complier and accepting user input immediately.
