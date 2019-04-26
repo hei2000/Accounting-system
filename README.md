@@ -34,9 +34,13 @@ The following input guidelines must be strictly followed when using the program 
 Before compling and executing the program, please download 'Makefile' and '______.cpp' to the same directory on your device. Make sure you have a complier installed on your device, for example, Terminal, before proceeding to the next steps.
 ### To compile the program
 In your complier, enter the following command:
+
 make (name)
+
 The program should be successfully complied.
 ### To execute the program
 In your complier, enter the following command:
+
 ./(name)
+
 The program should then be executing and accepting user input immediately.
