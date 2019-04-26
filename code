@@ -34,11 +34,11 @@ string getdate(){
 //get data from the user's file and store it in a linked list
 //return password
 
-string getdata(string name,record *& rec){
+string getdata(string name,record *& rec,string X_I){
   record * tail;
   string password,str;
   ifstream fin;
-  name = name + ".txt";
+  name = name + X_I + ".txt";
   fin.open(name.c_str());
   if (fin.fail()){
   	cout<<"Failed to open name. Cannot get data from server."<<endl;
@@ -64,7 +64,7 @@ string getdata(string name,record *& rec){
   return password;
   }
 
-void login(string & name, string & password,record *& rec){
+void login(string & name, string & password,record *& rec_X,record *& rec_I){
   int number;
   cout<<"Enter 1 to login\nEnter 2 to create new account\n";
   cin>>number;
@@ -76,7 +76,8 @@ void login(string & name, string & password,record *& rec){
     cout<<"Please enter your user name!"<<endl;
     cin>>name;
     string check_password;
-    check_password=getdata(name,rec);                                  //file input
+    check_password=getdata(name,rec_X,X);                                  //file input
+    getdata(name,rec_I,I);
     cout<<"Please enter your password!"<<endl;
     cin>>password;
     while (check_password!=password){
@@ -86,7 +87,7 @@ void login(string & name, string & password,record *& rec){
     }
   if (number==2){
     cout<<"Please enter your user name!"<<endl;
-    cin>>name;                                                //open new file here???
+    cin>>name;
     cout<<"Please enter your password!"<<endl;
     cin>>password;
     }
@@ -264,7 +265,7 @@ void check_budget(record * rec){
 }
 
 void forecast(record * rec){
-	int sum=sum_of_this_month(rec);
+	int sum=sum_of_this_month(rec_X);
 	int daypassed=atoi((getdate().substr(6,2)).c_str());
 	double expected_sum;
 	//check how many days in this month. ignore leap year
@@ -277,8 +278,8 @@ void forecast(record * rec){
 	cout<<"expect use "<<expected_sum<<endl;
 }
 
-void savedata(record * rec,string name,string password){
-	name = name + ".txt";
+void savedata(record * rec,string name,string password,string X_I){
+	name = name + X_I + ".txt";
 	ofstream fout;
 	fout.open(name.c_str());
 	if (fout.fail()){
@@ -303,10 +304,11 @@ void delete_all(record *&rec){
 }
   
 int main(){
-  record * rec = NULL;                                //dynamic memory management
+  record * rec_X = NULL;                                //dynamic memory management
+  record * rec_I = NULL;
   string name=" ",password=" ";
   int budget=-1;
-  login(name,password,rec);
+  login(name,password,rec_X,rec_I);
   
   printmenu();
   char choice;
@@ -315,17 +317,37 @@ int main(){
   cin>>choice;
   switch (choice){
   case '1':
-    add(rec);
+    char X_I;
+    cout<<"1: Expense\n2: Income\n";
+    cin >> X_I;
+    if (X_I=='1') add(rec_X);
+    if (X_I=='2') add(rec_I);
     break;
   case '2':
-    delete_(rec);
+    char X_I;
+    cout<<"1: Expense\n2: Income\n";
+    cin >> X_I;
+    if (X_I=='1') delete_(rec_X);
+    if (X_I=='2') delete_(rec_I);
     break;
   case '3':
-    delete_(rec);
-    add(rec);						//combine add(rec) and delete(rec)
+    char X_I;
+    cout<<"1: Expense\n2: Income\n";
+    cin >> X_I;
+    if (X_I=='1'){
+    delete_(rec_X);
+    add(rec_X);
+    }
+    if (X_I=='2'){
+    delete_(rec_I);
+    add(rec_I);
+    }
     break;
   case '4':
-    view(rec);
+    cout<<"Expense:"<<endl;
+    view(rec_X);
+    cout<<"Income:"<<endl;
+    view(rec_I);
     break;
   case '5':
     report();
@@ -335,7 +357,7 @@ int main(){
     cin>>budget;
     break;
   case '7':
-    forecast(rec);					//can forecase within year
+    forecast(rec_X);					//can forecase within year
     break;
   case 'N':
     cout<<"Bye!"<<endl;
@@ -343,9 +365,11 @@ int main(){
   default:
     cout<<"invalid input! Please input again!"<<endl;
     }
-  check_budget(rec);
+  check_budget(rec_X);
   }
-  savedata(rec,name,password);                           //file output
-  delete_all(rec);                       //avoid memory leakage
+  savedata(rec_X,name,password,X);                           //file output
+  savedata(rec_I,name,password,I);
+  delete_all(rec_X);                    		   //avoid memory leakage
+  delete_all(rec_I);
   return 0;
   }
