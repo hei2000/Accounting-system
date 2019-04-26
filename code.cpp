@@ -263,7 +263,7 @@ int sum_type(record * rec,string keyword){
 	record * current = rec;
 	while (current!=NULL){
 		if (current->type==keyword){
-			total+=current->amount;
+			total+=atoi((current->amount).c_str());
 			current=current->next;
 		}
 	}
@@ -275,7 +275,7 @@ int sum_account(record * rec,string keyword){		//almost same as sum_type but idk
 	record * current = rec;
 	while (current!=NULL){
 		if (current->account==keyword){
-			total+=current->amount;
+			total+=atoi((current->amount).c_str());
 			current=current->next;
 		}
 	}
@@ -284,7 +284,7 @@ int sum_account(record * rec,string keyword){		//almost same as sum_type but idk
 
 void report(record * rec_X,record * rec_I,string month){
 	int total_income=sum_of_this_month(rec_I);
-	int total_expense=sum_of_this_month(rec_X)
+	int total_expense=sum_of_this_month(rec_X);
 	cout<<"Month: "<<month<<endl;
 	cout<<"Monthly income: "<<total_income<<endl;
 	cout<<"Monthly expense: "<<total_expense<<endl;
@@ -357,6 +357,7 @@ int main(){
   record * rec_X = NULL;                                //dynamic memory management
   record * rec_I = NULL;
   string name=" ",password=" ";
+  string report_month;
   char X_I;
   int budget=-1;
   login(name,password,rec_X,rec_I);
@@ -399,9 +400,8 @@ int main(){
     break;
   case '5':
     cout<<"Please input the month in the following format.\nYYYYMM";
-    string month;
-    cin>>month;
-    report(rec_X,rec_I,month);
+    cin>>report_month;
+    report(rec_X,rec_I,report_month);
     break;
   case '6':
     cout<<"Please input the budget of this month"<<endl;
