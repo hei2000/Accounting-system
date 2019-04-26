@@ -93,6 +93,19 @@ void login(string & name, string & password,record *& rec){
   }
 
 void printmenu(){
+  cout << "Welcome to your accounting system!\n\n"
+    << "************** Menu **************\n\n"
+    << "1: Add income and expenses records\n"
+    << "2: Delete records\n"
+    << "3: Edit records\n"
+    << "4: View previous records\n"
+    << "5: Generate statistical report\n"
+    << "6: Set budget\n"
+    << "7: Generate financial forecast\n\n"
+    << "N: Exit\n\n"
+    << "**********************************\n\n"
+    << "Enter your option: ";	
+}
 
 record * findpos(string date,record * rec){
   record * current = rec;
@@ -120,13 +133,40 @@ void insert(record * after,string input){
 }
 
 void add(record * rec){
-  cout<<"Please enter date, amount, type of expense and account according to the format below"<<endl;
-  cout<<"YYYYMMDD AMOUNT TYPE ACCOUNT"<<endl;
-  string input;
-  cin.ignore();
-  getline(cin,input);
-  record * after = findpos(input.substr(0,8),rec);
-  insert(after, input);
+  cout << "Add income and expenses records\n\n"
+    << "*******************************\n"
+    << "1: Import multiple records\n"
+    << "2: Input single record\n"
+    << "N: Exit\n\n"
+    << "*******************************\n\n"
+    << "Enter your option: ";
+  char option;
+  cin >> option;
+  while (option != 'N' || option != '1' || option != '2') {
+    cout << "Invalid input! Please input again! " << endl;
+    cin >> option;
+  }
+  if (option == '1') {
+    string filename;
+    cout << "Enter the filename of import file: ";
+    cin >> filename;
+    fin.open(filename.c_str());
+    if (fin.fail()){
+      cout<<"Failed to open name. Cannot get data from file." << endl;
+    	exit(1);
+    }
+    // not yet finish
+    fin.close();
+  }
+  else if (option == '2') {
+    cout << "Please enter date, amount, type of expense and account according to the format below" << endl;
+    cout << "YYYYMMDD AMOUNT TYPE ACCOUNT" << endl;
+    string input;
+    cin.ignore();
+    getline(cin,input);
+    record * after = findpos(input.substr(0,8),rec);
+    insert(after, input);
+  }
 }
   
 int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail){
