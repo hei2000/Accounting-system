@@ -76,37 +76,38 @@ void printmenu(){
 
 record * findpos(string date,record * rec){
   record * current = rec;
-  int intdate = atoi(date.c_str())
+  int intdate = atoi(date.c_str());
   while (current != NULL){
-  if (intdate>atoi((current->date).c_str())){
-    if (current->next==NULL){
-      return current;
-    }
-    else{
-      current=current->next;
-      }
+  if (current->next==NULL){
+    return current;
+  }
+  if (intdate>atoi((current->next->date).c_str())){
+    current=current->next;
     }
   else{
     return current;
     }
   }
-  return current
+  return rec;
 }
 
 void insert(record * after,string input){
   record * tem = new record;
-  istringstream iss(str);
+  istringstream iss(input);
   iss>>tem->date>>tem->amount>>tem->type>>tem->account;
   tem->next=after->next;
   after->next=tem;
 }
 
 void add(record * rec){
-  string input;
   cout<<"Please enter date, amount, type of expense and account according to the format below"<<endl;
   cout<<"YYYYMMDD AMOUNT TYPE ACCOUNT"<<endl;
+  string input;
+  cin.ignore();
+  getline(cin,input);
   record * after = findpos(input.substr(0,8),rec);
   insert(after, input);
+}
   
 void print_ptr(string keyitem, string key, record * rec,record *ptr[]){
   int count=0;
@@ -183,9 +184,8 @@ int main(){
   
   printmenu();
   char choice;
-  
-  cin>>choice;
   while (choice!='N'){
+  cin>>choice;
   switch (choice){
   case '1':
     add(rec);
@@ -208,10 +208,12 @@ int main(){
   case '7':
     forecast();
     break;
+  case 'N':
+    cout<<"Bye!"
+    break
   default:
     cout<<"invalid input! Please input again!"<<endl;
     }
-  cin>>choice;
   }
   savedata();                           //file output
   deletedynamic();                       //avoid memory leakage
