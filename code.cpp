@@ -258,6 +258,56 @@ int sum_of_this_month(record * rec){
 	return total;
 }
 
+int sum_type(record * rec,string keyword){
+	int total=0;
+	record * current = rec;
+	while (current!=NULL){
+		if (current->type==keyword){
+			total+=current->amount;
+			current=current->next;
+		}
+	}
+	return total;
+}
+
+int sum_account(record * rec,string keyword){		//almost same as sum_type but idk how to combine them
+	int total=0;
+	record * current = rec;
+	while (current!=NULL){
+		if (current->account==keyword){
+			total+=current->amount;
+			current=current->next;
+		}
+	}
+	return total;
+}
+
+void report(record * rec_X,record * rec_I,string month){
+	int total_income=sum_of_this_month(rec_I);
+	int total_expense=sum_of_this_month(rec_X)
+	cout<<"Month: "<<month<<endl;
+	cout<<"Monthly income: "<<total_income<<endl;
+	cout<<"Monthly expense: "<<total_expense<<endl;
+	cout<<"Balance: "<<total_income-total_expense<<endl;
+	cout<<setprecision(2);
+	cout<<left<<setw(30)<<"Percentage of each income type: "<<setw(20)<<"Full-time: "<<sum_type(rec_I,"FT")/total_income*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Part-time: "<<sum_type(rec_I,"PT")/total_income*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_type(rec_I,"OT")/total_income*100<<"%"<<endl;
+	cout<<setw(30)<<"Percentage of each income account: "<<setw(20)<<"Cash: "<<sum_account(rec_I,"CA")/total_income*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Bank card: "<<sum_account(rec_I,"BC")/total_income*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_account(rec_I,"OT")/total_income*100<<"%"<<endl;
+	cout<<setw(30)<<"Percentage of each expense type: "<<setw(20)<<"Food: "<<sum_type(rec_X,"FD")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Transportation: "<<sum_type(rec_X,"TS")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Entertainment: "<<sum_type(rec_X,"EN")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Utility bills: "<<sum_type(rec_X,"UB")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_type(rec_X,"OT")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<"Percentage of each expense account: "<<setw(20)<<"Cash: "<<sum_account(rec_X,"CA")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Bank card: "<<sum_account(rec_X,"BC")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Credit card: "<<sum_account(rec_X,"CC")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Octopus card: "<<sum_account(rec_X,"OC")/total_expense*100<<"%"<<endl;
+	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_account(rec_X,"OT")/total_expense*100<<"%"<<endl;
+}
+
 void check_budget(record * rec,int budget){
 	if (sum_of_this_month(rec)>budget){
 		cout<<"overspend"<<endl;
@@ -348,14 +398,17 @@ int main(){
     view(rec_I);
     break;
   case '5':
-    report();
+    cout<<"Please input the month in the following format.\nYYYYMM";
+    string month;
+    cin>>month;
+    report(rec_X,rec_I,month);
     break;
   case '6':
     cout<<"Please input the budget of this month"<<endl;
     cin>>budget;
     break;
   case '7':
-    forecast(rec_X);					//can forecase within year
+    forecast(rec_X);
     break;
   case 'N':
     cout<<"Bye!"<<endl;
