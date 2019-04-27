@@ -108,6 +108,8 @@ If the option entered is '1', this function will be activated and the system wil
 > 1: Expense
 >
 > 2: Income
+>
+> Enter 1 or 2:
 
 Users then need to input either option '1' or '2'. Options other than these two are not accepted.
 
@@ -136,7 +138,7 @@ If option '1' is entered, the system will prompt the user to enter the filename 
 
 > Enter the filename of import file:
 
-If the file with the entered filename cannot be found, the system will output the following message and quit the add record function immediately:
+If the file with the entered filename cannot be found, the system will output the following message and quit the whole system immediately to avoid further error:
 
 > Failed to open file. Cannot get data from file.
 
