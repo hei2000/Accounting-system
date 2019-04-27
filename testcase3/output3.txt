@@ -1,0 +1,4 @@
+Enter 1 to login
+Enter 2 to create new account
+Please enter your user name!
+Failed to open name. Cannot get data from server.
