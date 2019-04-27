@@ -63,22 +63,31 @@ void delete_rec(record * after,record *&rec,record * head,record * tail);
 //Input: record pointer of linked list to be deleted, a string that tells whether it is a expense or income linked list
 void delete_(record *& rec,string XI);
 
-//
+//Input: record pointer of income/expense linked list,date in the form of YYYYMMDD
+//Output: return the sum of amount in the required month
 int sum_of_part_month(record * rec,string date);
 //Input: record pointer of income/expense linked list,type name,the required month
-//Output: the sum of not yet finish
+//Output: the sum of amount of items match with the keyword(type) and month
 double sum_type(record * rec,string keyword,string month);
 //Input: record pointer of income/expense linked list,account name,the required month
+//Output: the sum of amount of items match with the keyword(account) and month
 double sum_account(record * rec,string keyword,string month);
 //Function: print a financial report of the required month. It contains the month, monthly income, monthly expense,
 //          balance, percentage of each income type, income account, expense type, expense account spent in that month.
 //Input: the record pointers of income and expense linked list,the required month
 void report(record * rec_X,record * rec_I,string month);
 
+//Function: check whether the amount of expense in this month exceed the budget that user set
+//          if yes, print a alert to remind the user
+//          record pointer of expense linked list,the budget user set
 void check_budget(record * rec,int budget);
 
+//Function: print the expected amount of expense in this month through the current expense record
 void forecast(record * rec);
 
+//Function: stored the user's data to a particular file. The user can get it back after login
+//Input: record pointer of linked list to be stored, username, user password, X(expense)/I(income)
 void savedata(record * rec,string name,string password,string X_I);
 
+//Function: delete all dynamic variables after use to prevent memory leakage
 void delete_all(record *&rec);
