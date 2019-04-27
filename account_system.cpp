@@ -351,8 +351,8 @@ void check_budget(record * rec,int budget){
 }
 
 void forecast(record * rec){
-	int sum=sum_of_part_month(rec,"now");
-	int daypassed=atoi((getdate().substr(6,2)).c_str());
+	double sum=sum_of_part_month(rec,"now");
+	double daypassed=atoi((getdate().substr(6,2)).c_str());
 	double expected_sum;
 	//check how many days in this month. ignore leap year
 	string month=getdate().substr(4,2);
