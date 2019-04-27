@@ -302,7 +302,7 @@ If users have never set their budget, no alerts will be given out.
 If the option entered is '7', this function will be activated and the system will forecast the expense of the current month for the user with the following message:
 
 > An example of forecast in April after 'expense_sample.txt' and 'income_sample.txt' are imported:
->> Expected expense in this month: 120.0
+>> Expected expense in this month: 133.333
 
 
 ### N: Exit
