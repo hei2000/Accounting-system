@@ -1,0 +1,12 @@
+2
+user4
+abcdef
+1
+1
+2
+20190425 750 UB BC
+4
+1
+2
+1
+new_income.txt
