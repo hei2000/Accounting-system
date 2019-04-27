@@ -9,7 +9,7 @@ Personal users are the target users of this system. The accounting system keeps 
 
 
 ## Problem Setting
-To solve the above problems, a digital accounting system is introduced to replace the traditional yet time-consuming manual book-keeping method. This new system allows registered users to manage and keep their financial records (income and expenses) on their own devices, eliminating the need of carrying a physical cashbook since the system can perform balance calculations on its own. Users, who have logged into their respective accounts, can add financial records, or to view or amend records that are previously stored in the system at any time. They can set a budget for themselves in the system, so that when their expenses reach the set budget, the system will automatically alert the users to be aware of their financial status. The system is also able to generate monthly financial reports and expenditure forecasts, based on the data stored inside the system for better control of users’ income. No internet connection is required for this system, all financial records will be stored on the users’ own devices and accounts set up are only accessible in the same device. 
+To solve the above problems, a digital accounting system is introduced to replace the traditional yet time-consuming manual book-keeping method. This new system allows registered users to manage and keep their financial records (income and expenses) on their own devices, eliminating the need of carrying a physical cashbook since the system can perform balance calculations on its own. Users, who have logged into their respective accounts, can add financial records, or to view or amend records that are previously stored in the system at any time. Records are divided into two types: income and expenses, and they must be imported to the system respectively (i.e. mixed records cannot be imported together). They can set a budget for themselves in the system, so that when their expenses reach the set budget, the system will automatically alert the users to be aware of their financial status. The system is also able to generate monthly financial reports and expenditure forecasts, based on the data stored inside the system for better control of users’ income. No internet connection is required for this system, all financial records will be stored on the users’ own devices and accounts set up are only accessible in the same device. 
 
 
 ## Program Functionalities and Features
@@ -103,6 +103,80 @@ Users then need to input their option (from '1' to '7', or 'N') to the system in
 After the system has received a valid input, the corresponding function will then be activated and users will proceed to the next steps. 
 
 ### 1: Add income and expenses records
+If the option entered is '1', this function will be activated and the system will ask whether the input records belong to income or expense with the following messsage:
+
+> 1: Expense
+>
+> 2: Income
+
+Users then need to input either option '1' or '2'. Options other than these two are not accepted.
+
+After defining the income/expense type, the system will ask whether the user wants to import multiple records from an external file, or to input single records within the system, with the following message:
+
+> Add income and expenses records
+> 
+> \*******************************
+>
+>1: Import multiple records
+>
+>2: Input single record
+>
+>N: Exit
+>
+> \*******************************
+> 
+>Enter your option:
+
+Users are then required to input one of the option ('1', '2' or 'N'). If the input does not belong to the three options, the system will prompt the user to re-enter their option until it gets a valid input, with the following message:
+
+> Invalid input! Please input again!
+
+#### Option 1: Import multiple records
+If option '1' is entered, the system will prompt the user to enter the filename of the file that stores the financial records, with the following message:
+
+> Enter the filename of import file:
+
+If the file with the entered filename cannot be found, the system will output the following message and quit the add record function immediately:
+
+> Failed to open file. Cannot get data from file.
+
+But if the file can be found and are in the correct import format (see appendix), the financial records will be added to the accounting system and will be sorted according to the record date. Users will be headed back to the main menu after successful import of data.
+
+#### Option 2: Input single record
+If option '2' is entered, the system will prompt the user to enter a single record with the following message:
+
+> Please enter date, amount, type and account according to the format below.
+> 
+> YYYYMMDD AMOUNT TYPE ACCOUNT
+
+If the chosen record type is expense (1), the following reminder will be displayed:
+
+>> Please enter the short form for type and account.
+>>
+>> Type: FD(Food),TS(Transportation),EN(Entertainment),UB(Utility Bills),OT(Others)
+>>
+>> Account: CA(Cash),BC(Bank Card),OT(Others)
+
+If the chosen record type is income (2), the following reminder will be displayed:
+
+>> Please enter the short form for type and account.
+>>
+>> Type: FT(Full-time),PT(Part-time),OT(Others)
+>>
+>> Account: CA(Cash),BC(Bank Card),OT(Others)
+
+Users now can input the records according the formats specified above. For example:
+
+>>> For expense:
+>>> 
+>>> 20190427 13 FD CA
+
+>>> For income:
+>>>
+>>> 20190427 500 PT OT
+
+Please be reminded that the amount entered can only be in integer form.
+
 ### 2: Delete records
 ### 3: Edit records
 ### 4: View previous records
@@ -124,3 +198,5 @@ In your complier, enter the following command:
 ./(name)
 
 The program should then be executing in your complier and accepting user input immediately.
+
+## Appendix
