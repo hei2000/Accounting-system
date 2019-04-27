@@ -213,17 +213,15 @@ But if there are records stored inside the system, the system will prompt the us
 
 Users can then input their search keyword, which can be the date, amount, type or account. There is no limitation for the searching keyword. After inputting, the system will return the search results sorted by date as below:
 
-> An example of searching for expense with keyword 'FD'
+> An example of searching for expense with keyword 'BC' with the file 'expense_sample.txt' imported:
 >>
->> 0: 20181010 10 FD CA
+>> 0: 20190301 1000 UB BC
 >>
->> 1: 20181215 500 FD BC
->>
->> 2: 20190420 65 FD OT
+>> 1: 20190425 100 EN BC
 >>
 >> Number you want to delete
 
-Then, user are required to select the record to be deleted by entering the corresponding number. For example, if '2' is entered, the record '20190420 65 FD OT' will then be deleted from the accounting system. This action is not reversible.
+Then, user are required to select the record to be deleted by entering the corresponding number. For example, if '1' is entered, the record '20190425 100 EN BC' will then be deleted from the accounting system. This action is not reversible.
 
 However, if there are no results matching the entered keyword, the following message will be shown and users will be brought back to the main menu immediately:
 
@@ -257,30 +255,32 @@ For the next steps, please refer to the guide of 'Delete' and 'Add' respectively
 ### 4: View previous records
 If the option entered is '4', this function will be activated and the system will display all the stored records sorted by date in the following format:
 
-> Example
+> An example of records after 'expense_sample.txt' and 'income_sample.txt' are imported:
 >>
 >> Expense:
 >>
->> Date      Amount    Type      Account    
+>> Date      Amount    Type      Account   
 >>
->> 20180123  10        TS        CA        
+>> 20190201  50        OT        OT        
 >>
->> 20181010  10        FD        CA
+>> 20190205  10        TS        CA        
 >>
->> 20181215  500       FD        BC
+>> 20190301  1000      UB        BC        
 >>
->> 20190420  65        FD        OT
+>> 20190405  20        FD        CA        
+>>
+>> 20190425  100       EN        BC        
 >>
 >>
 >> Income:
 >>
->> Date      Amount    Type      Account    
+>> Date      Amount    Type      Account   
 >>
->> 20181210  500       PT        CA
+>> 20190201  1000      PT        CA        
 >>
->> 20190110  10000     FT        BC
+>> 20190301  20000     FT        BC     
 >>
->> 20190125  400       OT        OT
+>> 20190401  5000      OT        OT  
 
 After showing all records, the users will be brought back to the main menu automatically.
 
