@@ -28,41 +28,79 @@ After new users have created a new account / existing users have successfully lo
 The following input guidelines must be strictly followed when using the program functions in order to generate outputs displayed in correct formats. 
 After executing the program, the system will prompt the user to log in to their accounts, or to create new accounts to use the service with the following message:
 
-<< Enter 1 to login
-
-<< Enter 2 to create new account
+> Enter 1 to login
+>
+> Enter 2 to create new account
 
 Users can only input either '1' or '2', then press 'Enter' to proceed to the next stage. Characters other than '1' or '2' are not accepted and message "Invalid input! Please enter again!" will be shown if they are entered. Users will be required to input their option again until their input is either '1' or '2'.
 
 ### Log in to user accounts
 If the users input '1', the system will prompt the user to log in to their accounts with the following message:
 
-<< Please enter your user name!
+> Please enter your user name!
 
 Users are required to input their username, which is in the form of string, at this stage. It is assumed that only registered users will be logging into their accounts.
 After inputting the user name and pressing 'Enter', the system will prompt the user to enter their password with the following message:
 
-<< Please enter your password!
+> Please enter your password!
 
 Users then need to enter their password in order to successfully log into the system. The password entered will then be checked with the information stored inside the accounting system, and if the password does not match with the record, the system will prompt the user to re-enter their password until it is correct with the following message:
 
-<< Wrong password! Please enter your password again!
+> Wrong password! Please enter your password again!
 
 If the above message is not shown, it means that the user has already logged into the system successfully and the menu should be displayed immediately. Existing users will be able to retrieve previous financial records stored inside the system after logging in.
 
 ### Create new user accounts
 If the users input '2', the system will prompt the user to create a new account with the following message:
 
-<< Please enter your user name!
+> Please enter your user name!
 
 Users are required to input a new username, which is in the form of string at this stage.
 After inputting the username and pressing 'Enter', the system will prompt the user to create a password with the following message:
 
-<< Please enter your password!
+> Please enter your password!
 
 The password entered should be in the form of string and there are no limitations on the choice of characters used in the password.
 
 After pressing 'Enter', a new user account is then created for the new user and they are now able to use the accounting system. The menu should then be displayed immediately.
+
+### Menu and Selecting Functions
+After successful log-ins, the menu will be immediately displayed in the below format:
+
+> Welcome to your accounting system!
+>
+> 
+> ************** Menu **************
+>
+> 
+> 1: Add income and expenses records
+>
+> 2: Delete records
+>
+> 3: Edit records
+>
+> 4: View previous records
+>
+> 5: Generate statistical report
+>
+> 6: Set budget
+>
+> 7: Generate financial forecast
+>
+> 
+> N: Exit
+>
+> 
+> ********************************** 
+>
+> 
+> Enter your option:
+
+Users then need to input their option (from '1' to '7', or 'N') to the system in one single character. Characters other than the above eight options are not accepted and the system will prompt the user to enter their option again with the following message:
+
+> Invalid input! Please input again!
+
+After the system has received a valid input, the corresponding function will then be activated and users will proceed to the next steps. 
 
 ### 1: Add income and expenses records
 ### 2: Delete records
