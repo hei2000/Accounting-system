@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <ctime>
-#include "accounting_system.h"
+#include "account_system.h"
 using namespace std;
 
 int main(){
