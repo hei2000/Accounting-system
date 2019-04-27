@@ -332,7 +332,7 @@ Two files namely (username)X.txt and (username)I.txt will be saved to the same d
 
 
 ## Compilation and Execution Instructions
-Before compiling and executing the program, please download 'Makefile' and '______.cpp' to the same directory on your device. Make sure you have a complier installed on your device, for example, Terminal, before proceeding to the next steps.
+Before compiling and executing the program, please download all the source files, Makefile and other related sample files of this system as a ZIP from GitHub to your own device. Unzip the files under the same directory to prevent compilation errors. Make sure you have a complier installed on your device, for example, Terminal, before proceeding to the next steps. 
 
 ### To compile the program
 In your complier, move to the directory storing all the source files and enter the following command:
