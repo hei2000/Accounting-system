@@ -16,7 +16,7 @@ int main(){
   char X_I;
   int budget=INT8_MAX;
   login(name,password,rec_X,rec_I);
-  char choice='0;
+  char choice='0';
   while (choice!='N'){
   printmenu();
   cin>>choice;
