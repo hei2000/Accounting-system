@@ -108,7 +108,8 @@ void printmenu(){
     << "6: Set budget\n"
     << "7: Generate financial forecast\n\n"
     << "N: Exit\n\n"
-    << "**********************************\n";
+    << "**********************************\n\n"
+    << "Enter your option: ";
 }
 
 record * findpos(string date,record * rec){
@@ -150,14 +151,14 @@ void insert(record *& after,string input,record *& rec){
 
 void print_format_X(){
   cout<<"\nPlease enter the short form for type and account.\n"
-      <<"Type: FD(Food),TS(Transportation),EN(Entertainment),UB(Utility Bills,OT(Others)\n"
-      <<"Account: CA(Cash),BC(Bank Card),OT(Others)\n";
+      <<"Type: FD(Food), TS(Transportation), EN(Entertainment), UB(Utility Bills), OT(Others)\n"
+      <<"Account: CA(Cash), BC(Bank Card), OT(Others)\n";
 }
 
 void print_format_I(){
   cout<<"\nPlease enter the short form for type and account.\n"
-      <<"Type: FT(Full-time),PT(Part-time),OT(Others)\n"
-      <<"Account: CA(Cash),BC(Bank card),OT(Others)\n";
+      <<"Type: FT(Full-time), PT(Part-time), OT(Others)\n"
+      <<"Account: CA(Cash), BC(Bank card), OT(Others)\n";
 }
 
 void add(record *& rec,int XI){
@@ -186,7 +187,7 @@ void add(record *& rec,int XI){
     ifstream fin;
     fin.open(filename.c_str());
     if (fin.fail()){
-      cout<<"Failed to open name. Cannot get data from file." << endl;
+      cout<<"Failed to open " << filename << ". Cannot get data from file." << endl;
     	exit(1);
     }
     while (getline(fin, input)){
@@ -372,7 +373,7 @@ void savedata(record * rec,string name,string password,string X_I){
 	ofstream fout;
 	fout.open(name.c_str());
 	if (fout.fail()){
-		cout<<"Failed to open name. Cannot save data to the server"<<endl;
+		cout<<"Failed to open " << name << ". Cannot save data to the server."<<endl;
 		exit(1);
 	}
 	fout<<password<<endl;
