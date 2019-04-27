@@ -20,7 +20,7 @@ string getdate(){
 		date = date + "0";
 		}
 	date = date + to_string(datetm->tm_mday);
-	return date;
+	return date;						//in the form of YYYYMMDD
 }
 
 void view(record * rec){
@@ -42,13 +42,13 @@ string getdata(string name,record *& rec,string X_I){
   	cout<<"Failed to open name. Cannot get data from server."<<endl;
 	exit(1);
 	}
-  getline(fin,password);
+  getline(fin,password);						//get data from file
   int counter=0;
   while (getline(fin,str)){
     istringstream iss(str);
     record * p = new record;
     record * tail;
-    iss>>p->date>>p->amount>>p->type>>p->account;
+    iss>>p->date>>p->amount>>p->type>>p->account;			//store the data to the linked list
     p->next=NULL;
     if (rec==NULL){
       rec=p;
@@ -71,11 +71,11 @@ void login(string & name, string & password,record *& rec_X,record *& rec_I){
     cout<<"Invalid input! Please enter again!"<<endl;
     cin>>number;
     }
-  if (number==1){
+  if (number==1){									//login
     cout<<"Please enter your user name!"<<endl;
     cin>>name;
     string check_password;
-    check_password=getdata(name,rec_X,"X");
+    check_password=getdata(name,rec_X,"X");						//check the password
     getdata(name,rec_I,"I");
     cout<<"Please enter your password!"<<endl;
     cin>>password;
@@ -84,7 +84,7 @@ void login(string & name, string & password,record *& rec_X,record *& rec_I){
       cin>>password;
       }
     }
-  if (number==2){
+  if (number==2){									//create new account
     cout<<"Please enter your user name for new account!"<<endl;
     cin>>name;
     cout<<"Please enter your password for new account!"<<endl;
@@ -128,11 +128,11 @@ void insert(record *& after,string input,record *& rec){
   record * tem = new record;
   istringstream iss(input);
   iss>>tem->date>>tem->amount>>tem->type>>tem->account;
-  if (rec==NULL){
+  if (rec==NULL){								//check if the linked list is empty
     tem->next=NULL;
     rec=tem;
   }
-  else{ if (after == NULL){
+  else{ if (after == NULL){							//check the position to be inserted
     tem->next=rec;
     rec=tem;
   }
@@ -174,7 +174,7 @@ void add(record *& rec,int XI){
     cout << "Invalid input! Please input again! " << endl;
     cin >> option;
   }
-  if (option == '1') {
+  if (option == '1') {									//get datum from user input
     string filename;
     cout << "Enter the filename of import file: ";
     cin >> filename;
@@ -191,22 +191,22 @@ void add(record *& rec,int XI){
     fin.close();
     cout << "Records are successfully imported." << endl;
   }
-  else if (option == '2') {
+  else if (option == '2') {								//get a single input
     cout << "Please enter date, amount, type and account according to the format below." << endl;
     cout << "YYYYMMDD AMOUNT TYPE ACCOUNT" << endl;
-    if (XI==1) print_format_X();
-    if (XI==2) print_format_I();
+    if (XI==1) print_format_X();							//print format of expense input
+    if (XI==2) print_format_I();							//print format of income input
     cin.ignore();
     getline(cin,input);
-    record * after = findpos(input.substr(0,8),rec);
-    insert(after, input,rec);
+    record * after = findpos(input.substr(0,8),rec);					//find the position
+    insert(after, input,rec);								//insert to particular position
     cout << "Record is successfully added." << endl;
   }
 }
 
 int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail){
   int count=0;
-  if (rec->date==key || rec->amount==key || rec->type==key || rec->account==key){
+  if (rec->date==key || rec->amount==key || rec->type==key || rec->account==key){	//find the items that match the keyword
     cout<<count<<": "<<rec->date<<" "<<rec->amount<<" "<<rec->type<<" "<<rec->account<<endl;
     ptr[count]=head;
     count++;
