@@ -14,7 +14,7 @@ int main(){
   string name=" ",password=" ";
   string report_month;
   char X_I;
-  int budget=INT_MAX;
+  int budget=INT8_MAX;
   login(name,password,rec_X,rec_I);
   printmenu();
   char choice;
