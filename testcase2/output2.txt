@@ -1,0 +1,222 @@
+Enter 1 to login
+Enter 2 to create new account
+Please enter your user name for new account!
+Please enter your password for new account!
+Welcome to your accounting system!
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: 1: Expense
+2: Income
+Enter 1 or 2: Add income and expenses records
+
+*******************************
+1: Import multiple records
+2: Input single record
+N: Exit
+
+*******************************
+
+Enter your option: Enter the filename of import file: Records are successfully imported.
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: 1: Expense
+2: Income
+Enter 1 or 2: Add income and expenses records
+
+*******************************
+1: Import multiple records
+2: Input single record
+N: Exit
+
+*******************************
+
+Enter your option: Enter the filename of import file: Records are successfully imported.
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: 1: Expense
+2: Income
+Enter 1 or 2: Please enter a key word for searching
+0: 20190201 1000 PT CA
+number you want to delete
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: 1: Expense
+2: Income
+Enter 1 or 2: Please enter a key word for searching
+0: 20190425 100 EN BC
+number you want to delete
+Add income and expenses records
+
+*******************************
+1: Import multiple records
+2: Input single record
+N: Exit
+
+*******************************
+
+Enter your option: Please enter date, amount, type and account according to the format below.
+YYYYMMDD AMOUNT TYPE ACCOUNT
+
+Please enter the short form for type and account.
+Type: FD(Food), TS(Transportation), EN(Entertainment), UB(Utility Bills), OT(Others)
+Account: CA(Cash), BC(Bank Card), OT(Others)
+Record is successfully added.
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: 
+Expense:
+Date      Amount    Type      Account   
+20190201  50        OT        OT        
+20190205  10        TS        CA        
+20190301  1000      UB        BC        
+20190405  20        FD        CA        
+20190425  50        EN        BC        
+
+Income:
+Date      Amount    Type      Account   
+20190301  20000     FT        BC        
+20190401  5000      OT        OT        
+
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: Please input the month in the following format.
+YYYYMM: Month: 201904
+Monthly income: 5000
+Monthly expense: 70
+Balance: 4930
+Percentage of each income type:         Full-time:          0.0%
+                                        Part-time:          0.0%
+                                        Others:             100.0%
+Percentage of each income account:      Cash:               0.0%
+                                        Bank card:          0.0%
+                                        Others:             100.0%
+Percentage of each expense type:        Food:               28.6%
+                                        Transportation:     0.0%
+                                        Entertainment:      71.4%
+                                        Utility bills:      0.0%
+                                        Others:             0.0%
+Percentage of each expense account:     Cash:               28.6%
+                                        Bank card:          71.4%
+                                        Credit card:        0.0%
+                                        Octopus card:       0.0%
+                                        Others:             0.0%
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: Please input the budget of this month
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: 
+Expected expense in this month: 77.8
+************** Menu **************
+
+1: Add income and expenses records
+2: Delete records
+3: Edit records
+4: View previous records
+5: Generate statistical report
+6: Set budget
+7: Generate financial forecast
+
+N: Exit
+
+**********************************
+
+Enter your option: 
+Thank you for using the accounting system. Goodbye
+
