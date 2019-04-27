@@ -5,8 +5,8 @@
 #include <cstdlib>
 #include <iomanip>
 #include <ctime>
-#include "account_system.h"
 using namespace std;
+#include "account_system.h"
 
 //return current date in the form of YYYYMMDD
 string getdate(){
