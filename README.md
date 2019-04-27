@@ -140,9 +140,11 @@ If option '1' is entered, the system will prompt the user to enter the filename 
 
 If the file with the entered filename cannot be found, the system will output the following message and quit the whole system immediately to avoid further error:
 
-> Failed to open file. Cannot get data from file.
+> Failed to open (filename.txt). Cannot get data from file.
 
-But if the file can be found and are in the correct import format (see appendix), the financial records will be added to the accounting system and will be sorted according to the record date. Users will be headed back to the main menu after successful import of data.
+But if the file can be found and are in the correct import format (see appendix 1), the financial records will be added to the accounting system and will be sorted according to the record date. Users will be headed back to the main menu after the following message is shown:
+
+> Records are successfully imported.
 
 #### Option 2: Input single record
 If option '2' is entered, the system will prompt the user to enter a single record with the following message:
@@ -178,6 +180,15 @@ Users now can input the records according the formats specified above. For examp
 >>> 20190427 500 PT OT
 
 Please be reminded that the amount entered can only be in integer form.
+
+After the record is successfully added, the following message will be displayed and users will be brought back to the main menu:
+
+> Record is successfully added.
+
+#### Option N: Exit
+If option 'N' is entered, user will be brought back to the main menu after the following message is shown:
+
+> Back to the menu
 
 ### 2: Delete records
 ### 3: Edit records
