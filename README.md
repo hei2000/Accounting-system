@@ -255,6 +255,35 @@ Users can then input their search keyword, which can be the date, amount, type o
 For the next steps, please refer to the guide of 'Delete' and 'Add' respectively, since 'Edit' is an integrated function of 'Delete' and 'Add'.
 
 ### 4: View previous records
+If the option entered is '4', this function will be activated and the system will display all the stored records sorted by date in the following format:
+
+> Example
+>>
+>> Expense:
+>>
+>> Date      Amount    Type      Account    
+>>
+>> 20180123  10        TS        CA        
+>>
+>> 20181010  10        FD        CA
+>>
+>> 20181215  500       FD        BC
+>>
+>> 20190420  65        FD        OT
+>>
+>>
+>> Income:
+>>
+>> Date      Amount    Type      Account    
+>>
+>> 20181210  500       PT        CA
+>>
+>> 20190110  10000     FT        BC
+>>
+>> 20190125  400       OT        OT
+
+After showing all records, the users will be brought back to the main menu automatically.
+
 ### 5: Generate statistical report
 ### 6: Set budget
 ### 7: Generate financial forecast
