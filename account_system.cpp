@@ -206,14 +206,14 @@ void add(record *& rec,int XI){
 
 int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail){
   int count=0;
-  if (rec->date==key || rec->amount==key || rec->type==key || rec->account==key){	//find the items that match the keyword
+  if (rec->date==key || rec->amount==key || rec->type==key || rec->account==key){	//check the first item
     cout<<count<<": "<<rec->date<<" "<<rec->amount<<" "<<rec->type<<" "<<rec->account<<endl;
     ptr[count]=head;
     count++;
   }
   record * current=rec;
   if (current->next!=NULL){
-  while (current->next->next!=NULL){
+  while (current->next->next!=NULL){							//check 2-(n-1) items
     if (current->next->date==key || current->next->amount==key || current->next->type==key || current->next->account==key){
       cout<<count<<": "<<current->next->date<<" "<<current->next->amount<<" "<<current->next->type<<" "<<current->next->account<<endl;
       ptr[count]=current;
@@ -224,7 +224,7 @@ int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail
 }
   if (current!=rec){
   current=current->next;
-  if (current->date==key || current->amount==key || current->type==key || current->account==key){
+  if (current->date==key || current->amount==key || current->type==key || current->account==key){	//check the last item
      cout<<count<<": "<<current->date<<" "<<current->amount<<" "<<current->type<<" "<<current->account<<endl;
      ptr[count]=tail;
      count++;
@@ -234,12 +234,12 @@ int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail
 }
 
 void delete_rec(record * after,record *&rec,record * head,record * tail){
-  if (after==head){
+  if (after==head){							//delete head
     record * tem=rec;
     rec=rec->next;
     delete tem;
   }
-  if (after==tail){
+  if (after==tail){							//delete tail
     record * current=rec;
     while (current->next->next!=NULL){
       current=current->next;
@@ -248,7 +248,7 @@ void delete_rec(record * after,record *&rec,record * head,record * tail){
     current->next=NULL;
     delete tem;
   }
-  if (after!=head && after !=tail){
+  if (after!=head && after !=tail){					//delete the middle one
     record * tem = after->next;
     after->next=tem->next;
     delete tem;
@@ -256,8 +256,8 @@ void delete_rec(record * after,record *&rec,record * head,record * tail){
 }
 
 void delete_(record *& rec,string XI){
-  if (rec==NULL){
-    cout<<"\nThere is no "<<XI<<" record. Delete function is not available yet.\n";
+  if (rec==NULL){									//check if the linked list is empty
+    cout<<"\nThere is no "<<XI<<" record. Delete function is not available yet.\n";	//if yes, terminate the function
     return;
   }
   record tem1,tem2;
@@ -267,7 +267,7 @@ void delete_(record *& rec,string XI){
   cout<<"Please enter a key word for searching"<<endl;
   cin>>keyword;
   record *ptr[300];
-  if (print_ptr(keyword,rec,ptr,head,tail)!=0){
+  if (print_ptr(keyword,rec,ptr,head,tail)!=0){				//to ensure that there is at least one item matches the keyword
     cout<<"number you want to delete"<<endl;
     int number;
     cin>>number;
@@ -281,7 +281,7 @@ int sum_of_part_month(record * rec,string date){
 	int total=0;
 	record * current = rec;
 	while (current!=NULL){
-		if ((current->date).substr(0,6)==date.substr(0,6)){
+		if ((current->date).substr(0,6)==date.substr(0,6)){		//check if the items belong to this month
 			total+=atoi((current->amount).c_str());
 		}
     current=current->next;
@@ -293,15 +293,15 @@ double sum_type(record * rec,string keyword,string month){
 	double total=0;
 	record * current = rec;
 	while (current!=NULL){
-		if (current->type==keyword && (current->date).substr(0,6)==month.substr(0,6)){
-			total+=atoi((current->amount).c_str());
+		if (current->type==keyword && (current->date).substr(0,6)==month.substr(0,6)){ //check if the item contains the keyword and belong
+			total+=atoi((current->amount).c_str());				       //belong to the particular month
 		}
     current=current->next;
 	}
 	return total;
 }
 
-double sum_account(record * rec,string keyword,string month){		//almost same as sum_type but idk how to combine them
+double sum_account(record * rec,string keyword,string month){
 	double total=0;
 	record * current = rec;
 	while (current!=NULL){
@@ -320,7 +320,7 @@ void report(record * rec_X,record * rec_I,string month){
 	cout<<"Monthly income: "<<total_income<<endl;
 	cout<<"Monthly expense: "<<total_expense<<endl;
 	cout<<"Balance: "<<total_income-total_expense<<endl;
-	cout<<fixed<<setprecision(1);
+	cout<<fixed<<setprecision(1);					//print the number with 1 decimal place
   cout<<left;
   if (total_income!=0){
 	   cout<<setw(40)<<"Percentage of each income type: "<<setw(20)<<"Full-time: "<<sum_type(rec_I,"FT",month)/total_income*100<<"%"<<endl;
@@ -354,7 +354,7 @@ void forecast(record * rec){
 	double sum=sum_of_part_month(rec,"now");
 	double daypassed=atoi((getdate().substr(6,2)).c_str());
 	double expected_sum;
-	//check how many days in this month. ignore leap year
+	//check the number of day in this month. (ignored leap year)
 	string month=getdate().substr(4,2);
 	if (month=="02") expected_sum=sum/daypassed*28;
 	if (month=="01" || month=="03" || month=="05" || month=="07" || month=="08" || month=="10" || month=="12")
@@ -366,7 +366,7 @@ void forecast(record * rec){
 
 void savedata(record * rec,string name,string password,string X_I){
 	name = name + X_I + ".txt";
-	ofstream fout;
+	ofstream fout;								//file output
 	fout.open(name.c_str());
 	if (fout.fail()){
 		cout<<"Failed to open " << name << ". Cannot save data to the server."<<endl;
