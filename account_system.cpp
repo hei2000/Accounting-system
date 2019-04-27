@@ -8,7 +8,6 @@
 using namespace std;
 #include "account_system.h"
 
-//return current date in the form of YYYYMMDD
 string getdate(){
 	time_t now = time(0);
 	tm *datetm = localtime(&now);
@@ -24,7 +23,6 @@ string getdate(){
 	return date;
 }
 
-//print record within one month instead of all record???
 void view(record * rec){
 	cout<<left<<setw(10)<<"Date"<<setw(10)<<"Amount"<<setw(10)<<"Type"<<setw(10)<<"Account"<<endl;
 	record * current = rec;
@@ -33,9 +31,6 @@ void view(record * rec){
 		current=current->next;
 	}
 }
-
-//get data from the user's file and store it in a linked list
-//return password
 
 string getdata(string name,record *& rec,string X_I){
   record * tail;
@@ -80,7 +75,7 @@ void login(string & name, string & password,record *& rec_X,record *& rec_I){
     cout<<"Please enter your user name!"<<endl;
     cin>>name;
     string check_password;
-    check_password=getdata(name,rec_X,"X");                                  //file input
+    check_password=getdata(name,rec_X,"X");
     getdata(name,rec_I,"I");
     cout<<"Please enter your password!"<<endl;
     cin>>password;
