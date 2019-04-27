@@ -256,35 +256,54 @@ For the next steps, please refer to the guide of 'Delete' and 'Add' respectively
 If the option entered is '4', this function will be activated and the system will display all the stored records sorted by date in the following format:
 
 > An example of records after 'expense_sample.txt' and 'income_sample.txt' are imported:
->>
->> Expense:
->>
+>> <pre>Expense:
 >> Date      Amount    Type      Account   
->>
 >> 20190201  50        OT        OT        
->>
 >> 20190205  10        TS        CA        
->>
 >> 20190301  1000      UB        BC        
->>
 >> 20190405  20        FD        CA        
->>
 >> 20190425  100       EN        BC        
->>
->>
+>> 
 >> Income:
->>
 >> Date      Amount    Type      Account   
->>
 >> 20190201  1000      PT        CA        
->>
->> 20190301  20000     FT        BC     
->>
->> 20190401  5000      OT        OT  
+>> 20190301  20000     FT        BC        
+>> 20190401  5000      OT        OT  </pre>
 
 After showing all records, the users will be brought back to the main menu automatically.
 
 ### 5: Generate statistical report
+If the option entered is '5', this function will be activated and the system will prompt the user to enter a specific month to generate a statistical report for that month with the following message:
+
+> <pre>Please input the month in the following format.
+> YYYYMM: </pre>
+
+Users must enter the month with the specified format 'YYYYMM'. For example, '201904' for April 2019. Then the system will generate the statistical report with the below format:
+
+> An example of report of April 2019 after 'expense_sample.txt' and 'income_sample.txt' are imported:
+>> <pre>Month: 201904
+>> Monthly income: 5000
+>> Monthly expense: 120
+>> Balance: 4880
+>> Percentage of each income type:         Full-time:          0.0%
+>>                                         Part-time:          0.0%
+>>                                         Others:             100.0%
+>> Percentage of each income account:      Cash:               0.0%
+>>                                         Bank card:          0.0%
+>>                                         Others:             100.0%
+>> Percentage of each expense type:        Food:               16.7%
+>>                                         Transportation:     0.0%
+>>                                         Entertainment:      83.3%
+>>                                         Utility bills:      0.0%
+>>                                         Others:             0.0%
+>> Percentage of each expense account:     Cash:               16.7%
+>>                                         Bank card:          83.3%
+>>                                         Credit card:        0.0%
+>>                                         Octopus card:       0.0%
+>>                                         Others:             0.0% </pre>
+
+After the report is displayed, the users will be brought back to the main menu again.
+
 ### 6: Set budget
 ### 7: Generate financial forecast
 
