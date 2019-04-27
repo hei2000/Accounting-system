@@ -32,15 +32,15 @@ After executing the program, the system will prompt the user to log in to their 
 
 << Enter 2 to create new account
 
-Users can only input either ‘1’ or ‘2’, then press ‘Enter’ to proceed to the next stage. Characters other than ‘1’ or ‘2’ are not accepted and message “Invalid input! Please enter again!” will be shown if they are entered. Users will be required to input their option again until their input is either ‘1’ or ‘2’.
+Users can only input either '1' or '2', then press 'Enter' to proceed to the next stage. Characters other than '1' or '2' are not accepted and message "Invalid input! Please enter again!" will be shown if they are entered. Users will be required to input their option again until their input is either '1' or '2'.
 
 ### Log in to user accounts
-If the users input ‘1’, the system will prompt the user to log in to their accounts with the following message:
+If the users input '1', the system will prompt the user to log in to their accounts with the following message:
 
 << Please enter your user name!
 
 Users are required to input their username, which is in the form of string, at this stage. It is assumed that only registered users will be logging into their accounts.
-After inputting the user name and pressing ‘Enter’, the system will prompt the user to enter their password with the following message:
+After inputting the user name and pressing 'Enter', the system will prompt the user to enter their password with the following message:
 
 << Please enter your password!
 
@@ -51,18 +51,18 @@ Users then need to enter their password in order to successfully log into the sy
 If the above message is not shown, it means that the user has already logged into the system successfully and the menu should be displayed immediately. Existing users will be able to retrieve previous financial records stored inside the system after logging in.
 
 ### Create new user accounts
-If the users input ‘2’, the system will prompt the user to create a new account with the following message:
+If the users input '2', the system will prompt the user to create a new account with the following message:
 
 << Please enter your user name!
 
 Users are required to input a new username, which is in the form of string at this stage.
-After inputting the username and pressing ‘Enter’, the system will prompt the user to create a password with the following message:
+After inputting the username and pressing 'Enter', the system will prompt the user to create a password with the following message:
 
 << Please enter your password!
 
 The password entered should be in the form of string and there are no limitations on the choice of characters used in the password.
 
-After pressing ‘Enter’, a new user account is then created for the new user and they are now able to use the accounting system. The menu should then be displayed immediately.
+After pressing 'Enter', a new user account is then created for the new user and they are now able to use the accounting system. The menu should then be displayed immediately.
 
 ### 1: Add income and expenses records
 ### 2: Delete records
