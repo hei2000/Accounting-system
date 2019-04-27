@@ -31,6 +31,16 @@ string getdate(){
 	return date;
 }
 
+//print record within one month instead of all record???
+void view(record * rec){
+	cout<<left<<setw(10)<<"Date"<<setw(10)<<"Amount"<<setw(10)<<"Type"<<setw(10)<<"Account"<<endl;
+	record * current = rec;
+	while (current!=NULL){
+		cout<<setw(10)<<current->date<<setw(10)<<current->amount<<setw(10)<<current->type<<setw(10)<<current->account<<endl;
+		current=current->next;
+	}
+}
+
 //get data from the user's file and store it in a linked list
 //return password
 
@@ -61,6 +71,7 @@ string getdata(string name,record *& rec,string X_I){
       tail=p;
       }
     }
+  fin.close();
   return password;
   }
 
@@ -86,9 +97,9 @@ void login(string & name, string & password,record *& rec_X,record *& rec_I){
       }
     }
   if (number==2){
-    cout<<"Please enter your user name!"<<endl;
+    cout<<"Please enter your user name for new account!"<<endl;
     cin>>name;
-    cout<<"Please enter your password!"<<endl;
+    cout<<"Please enter your password for new account!"<<endl;
     cin>>password;
     }
   }
@@ -104,14 +115,14 @@ void printmenu(){
     << "6: Set budget\n"
     << "7: Generate financial forecast\n\n"
     << "N: Exit\n\n"
-    << "**********************************\n\n"
-    << "Enter your option: ";
+    << "**********************************\n";
 }
 
 record * findpos(string date,record * rec){
   record * current = rec;
   int intdate = atoi(date.c_str());
   while (current != NULL){
+  if (intdate<atoi((current->date).c_str())) return NULL;
   if (current->next==NULL){
     return current;
   }
@@ -125,15 +136,38 @@ record * findpos(string date,record * rec){
   return rec;
 }
 
-void insert(record * after,string input){
+void insert(record *& after,string input,record *& rec){
   record * tem = new record;
   istringstream iss(input);
   iss>>tem->date>>tem->amount>>tem->type>>tem->account;
-  tem->next=after->next;
-  after->next=tem;
+  if (rec==NULL){
+    tem->next=NULL;
+    rec=tem;
+  }
+  else{ if (after == NULL){
+    tem->next=rec;
+    rec=tem;
+  }
+  else{
+    tem->next=after->next;
+    after->next=tem;
+    }
+  }
 }
 
-void add(record * rec){
+void print_format_X(){
+  cout<<"\nPlease enter the short form for type and account.\n"
+      <<"Type: FD(Food),TS(Transportation),EN(Entertainment),UB(Utility Bills,OT(Others)\n"
+      <<"Account: CA(Cash),BC(Bank Card),OT(Others)\n";
+}
+
+void print_format_I(){
+  cout<<"\nPlease enter the short form for type and account.\n"
+      <<"Type: FT(Full-time),PT(Part-time),OT(Others)\n"
+      <<"Account: CA(Cash),BC(Bank card),OT(Others)\n";
+}
+
+void add(record *& rec,int XI){
   cout << "Add income and expenses records\n\n"
     << "*******************************\n"
     << "1: Import multiple records\n"
@@ -142,8 +176,13 @@ void add(record * rec){
     << "*******************************\n\n"
     << "Enter your option: ";
   char option;
+  string input;
   cin >> option;
-  while (option != 'N' || option != '1' || option != '2') {
+  if (option=='N'){
+    cout<<"\nBack to the menu\n";
+    return;
+  }
+  while (option != '1' && option != '2') {
     cout << "Invalid input! Please input again! " << endl;
     cin >> option;
   }
@@ -151,6 +190,7 @@ void add(record * rec){
     string filename;
     cout << "Enter the filename of import file: ";
     cin >> filename;
+    ifstream fin;
     fin.open(filename.c_str());
     if (fin.fail()){
       cout<<"Failed to open name. Cannot get data from file." << endl;
@@ -158,18 +198,19 @@ void add(record * rec){
     }
     while (getline(fin, input)){
       record * after = findpos(input.substr(0,8),rec);
-      insert(after, input);
+      insert(after, input,rec);
     }
     fin.close();
   }
   else if (option == '2') {
-    cout << "Please enter date, amount, type of expense and account according to the format below" << endl;
+    cout << "Please enter date, amount, type and account according to the format below." << endl;
     cout << "YYYYMMDD AMOUNT TYPE ACCOUNT" << endl;
-    string input;
+    if (XI==1) print_format_X();
+    if (XI==2) print_format_I();
     cin.ignore();
     getline(cin,input);
     record * after = findpos(input.substr(0,8),rec);
-    insert(after, input);
+    insert(after, input,rec);
   }
 }
 
@@ -177,10 +218,11 @@ int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail
   int count=0;
   if (rec->date==key || rec->amount==key || rec->type==key || rec->account==key){
     cout<<count<<": "<<rec->date<<" "<<rec->amount<<" "<<rec->type<<" "<<rec->account<<endl;
-    ptr[count]=head;                                                                               //delete head
+    ptr[count]=head;
     count++;
   }
   record * current=rec;
+  if (current->next!=NULL){
   while (current->next->next!=NULL){
     if (current->next->date==key || current->next->amount==key || current->next->type==key || current->next->account==key){
       cout<<count<<": "<<current->next->date<<" "<<current->next->amount<<" "<<current->next->type<<" "<<current->next->account<<endl;
@@ -189,12 +231,13 @@ int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail
       }
     current=current->next;
   }
+}
   if (current!=rec){
   current=current->next;
   if (current->date==key || current->amount==key || current->type==key || current->account==key){
      cout<<count<<": "<<current->date<<" "<<current->amount<<" "<<current->type<<" "<<current->account<<endl;
      ptr[count]=tail;
-     count++;                                                                              //delete tail
+     count++;
     }
   }
   return count;
@@ -222,103 +265,103 @@ void delete_rec(record * after,record *&rec,record * head,record * tail){
   }
 }
 
-void delete_(record *& rec){
+void delete_(record *& rec,string XI){
+  if (rec==NULL){
+    cout<<"\nThere is no "<<XI<<" record. Delete function is not available yet.\n";
+    return;
+  }
   record tem1,tem2;
   record * head=&tem1;
   record * tail=&tem2;
   string keyword;
   cout<<"Please enter a key word for searching"<<endl;
   cin>>keyword;
-  record *ptr[300];                              //use dynamic memory if possible
+  record *ptr[300];
   if (print_ptr(keyword,rec,ptr,head,tail)!=0){
     cout<<"number you want to delete"<<endl;
     int number;
     cin>>number;
     delete_rec(ptr[number],rec,head,tail);
   }
-  else cout<<"Not found!"<<endl;
+  else cout<<"\nCannot find a record that matches the key word!"<<endl;
 }
 
-//print record within one month instead of all record???
-void view(record * rec){
-	cout<<left<<setw(10)<<"Date"<<setw(10)<<"Amount"<<setw(10)<<"Type"<<setw(10)<<"Account"<<endl;
-	record * current = rec;
-	while (current!=NULL){
-		cout<<setw(10)<<current->date<<setw(10)<<current->amount<<setw(10)<<current->type<<setw(10)<<current->account<<endl;
-		current=current->next;
-	}
-}
-
-int sum_of_this_month(record * rec){
-	string date=getdate();
+int sum_of_part_month(record * rec,string date){
+	if (date=="now") date=getdate();
 	int total=0;
 	record * current = rec;
 	while (current!=NULL){
 		if ((current->date).substr(0,6)==date.substr(0,6)){
 			total+=atoi((current->amount).c_str());
 		}
+    current=current->next;
 	}
 	return total;
 }
 
-int sum_type(record * rec,string keyword){
-	int total=0;
+double sum_type(record * rec,string keyword,string month){
+	double total=0;
 	record * current = rec;
 	while (current!=NULL){
-		if (current->type==keyword){
+		if (current->type==keyword && (current->date).substr(0,6)==month.substr(0,6)){
 			total+=atoi((current->amount).c_str());
-			current=current->next;
 		}
+    current=current->next;
 	}
 	return total;
 }
 
-int sum_account(record * rec,string keyword){		//almost same as sum_type but idk how to combine them
-	int total=0;
+double sum_account(record * rec,string keyword,string month){		//almost same as sum_type but idk how to combine them
+	double total=0;
 	record * current = rec;
 	while (current!=NULL){
-		if (current->account==keyword){
+		if (current->account==keyword && (current->date).substr(0,6)==month.substr(0,6)){
 			total+=atoi((current->amount).c_str());
-			current=current->next;
 		}
+    current=current->next;
 	}
 	return total;
 }
 
 void report(record * rec_X,record * rec_I,string month){
-	int total_income=sum_of_this_month(rec_I);
-	int total_expense=sum_of_this_month(rec_X);
+	int total_income=sum_of_part_month(rec_I,month);
+	int total_expense=sum_of_part_month(rec_X,month);
 	cout<<"Month: "<<month<<endl;
 	cout<<"Monthly income: "<<total_income<<endl;
 	cout<<"Monthly expense: "<<total_expense<<endl;
 	cout<<"Balance: "<<total_income-total_expense<<endl;
-	cout<<setprecision(2);
-	cout<<left<<setw(30)<<"Percentage of each income type: "<<setw(20)<<"Full-time: "<<sum_type(rec_I,"FT")/total_income*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Part-time: "<<sum_type(rec_I,"PT")/total_income*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_type(rec_I,"OT")/total_income*100<<"%"<<endl;
-	cout<<setw(30)<<"Percentage of each income account: "<<setw(20)<<"Cash: "<<sum_account(rec_I,"CA")/total_income*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Bank card: "<<sum_account(rec_I,"BC")/total_income*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_account(rec_I,"OT")/total_income*100<<"%"<<endl;
-	cout<<setw(30)<<"Percentage of each expense type: "<<setw(20)<<"Food: "<<sum_type(rec_X,"FD")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Transportation: "<<sum_type(rec_X,"TS")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Entertainment: "<<sum_type(rec_X,"EN")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Utility bills: "<<sum_type(rec_X,"UB")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_type(rec_X,"OT")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<"Percentage of each expense account: "<<setw(20)<<"Cash: "<<sum_account(rec_X,"CA")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Bank card: "<<sum_account(rec_X,"BC")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Credit card: "<<sum_account(rec_X,"CC")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Octopus card: "<<sum_account(rec_X,"OC")/total_expense*100<<"%"<<endl;
-	cout<<setw(30)<<" "<<setw(20)<<"Others: "<<sum_account(rec_X,"OT")/total_expense*100<<"%"<<endl;
+	cout<<fixed<<setprecision(1);
+  cout<<left;
+  if (total_income!=0){
+	   cout<<setw(40)<<"Percentage of each income type: "<<setw(20)<<"Full-time: "<<sum_type(rec_I,"FT",month)/total_income*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Part-time: "<<sum_type(rec_I,"PT",month)/total_income*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Others: "<<sum_type(rec_I,"OT",month)/total_income*100<<"%"<<endl;
+	   cout<<setw(40)<<"Percentage of each income account: "<<setw(20)<<"Cash: "<<sum_account(rec_I,"CA",month)/total_income*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Bank card: "<<sum_account(rec_I,"BC",month)/total_income*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Others: "<<sum_account(rec_I,"OT",month)/total_income*100<<"%"<<endl;
+   }
+  if (total_expense!=0){
+	   cout<<setw(40)<<"Percentage of each expense type: "<<setw(20)<<"Food: "<<sum_type(rec_X,"FD",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Transportation: "<<sum_type(rec_X,"TS",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Entertainment: "<<sum_type(rec_X,"EN",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Utility bills: "<<sum_type(rec_X,"UB",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Others: "<<sum_type(rec_X,"OT",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<"Percentage of each expense account: "<<setw(20)<<"Cash: "<<sum_account(rec_X,"CA",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Bank card: "<<sum_account(rec_X,"BC",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Credit card: "<<sum_account(rec_X,"CC",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Octopus card: "<<sum_account(rec_X,"OC",month)/total_expense*100<<"%"<<endl;
+	   cout<<setw(40)<<" "<<setw(20)<<"Others: "<<sum_account(rec_X,"OT",month)/total_expense*100<<"%"<<endl;
+   }
 }
 
 void check_budget(record * rec,int budget){
-	if (sum_of_this_month(rec)>budget){
-		cout<<"overspend"<<endl;
+	if (sum_of_part_month(rec,"now")>budget){
+		cout<<"\nAlert: overspending in this month.\n";
 	}
 }
 
 void forecast(record * rec){
-	int sum=sum_of_this_month(rec);
+	int sum=sum_of_part_month(rec,"now");
 	int daypassed=atoi((getdate().substr(6,2)).c_str());
 	double expected_sum;
 	//check how many days in this month. ignore leap year
@@ -328,7 +371,7 @@ void forecast(record * rec){
 		expected_sum=sum/daypassed*31;
 	if (month=="04" || month=="06" || month=="09" || month=="11")
 		expected_sum=sum/daypassed*30;
-	cout<<"expect use "<<expected_sum<<endl;
+	cout<<"\nExpected expense in this month: "<<expected_sum<<endl;
 }
 
 void savedata(record * rec,string name,string password,string X_I){
@@ -345,6 +388,7 @@ void savedata(record * rec,string name,string password,string X_I){
 		fout<<current->date<<" "<<current->amount<<" "<<current->type<<" "<<current->account<<endl;
 		current=current->next;
 	}
+  fout.close();
 }
 
 void delete_all(record *&rec){
@@ -362,47 +406,53 @@ int main(){
   string name=" ",password=" ";
   string report_month;
   char X_I;
-  int budget=-1;
+  int budget=INT_MAX;
   login(name,password,rec_X,rec_I);
-
   printmenu();
   char choice;
   while (choice!='N'){
-  cout<<"input your choice"<<endl;
+  cout<<"\nEnter 8: View menu again\nEnter your option: ";
   cin>>choice;
   switch (choice){
   case '1':
-    cout<<"1: Expense\n2: Income\n";
+    cout<<"1: Expense\n2: Income\nEnter 1 or 2: ";
     cin >> X_I;
-    if (X_I=='1') add(rec_X);
-    if (X_I=='2') add(rec_I);
+    if (X_I=='1') add(rec_X,1);
+    if (X_I=='2') add(rec_I,2);
     break;
   case '2':
-    cout<<"1: Expense\n2: Income\n";
+    cout<<"1: Expense\n2: Income\nEnter 1 or 2: ";
     cin >> X_I;
-    if (X_I=='1') delete_(rec_X);
-    if (X_I=='2') delete_(rec_I);
+    if (X_I=='1') delete_(rec_X,"expense");
+    if (X_I=='2') delete_(rec_I,"income");
     break;
   case '3':
-    cout<<"1: Expense\n2: Income\n";
+    cout<<"1: Expense\n2: Income\nEnter 1 or 2: ";
     cin >> X_I;
     if (X_I=='1'){
-    delete_(rec_X);
-    add(rec_X);
+      if (rec_X!=NULL){
+        delete_(rec_X,"expense");
+        add(rec_X,1);
+      }
+      else cout<<"\nThere is no expense record. Edit function is not available yet.\n";
     }
     if (X_I=='2'){
-    delete_(rec_I);
-    add(rec_I);
+      if (rec_I!=NULL){
+        delete_(rec_I,"income");
+        add(rec_I,2);
+      }
+      else cout<<"\nThere is no income record. Edit function is not available yet.\n";
     }
     break;
   case '4':
-    cout<<"Expense:"<<endl;
+    cout<<"\nExpense:"<<endl;
     view(rec_X);
-    cout<<"Income:"<<endl;
+    cout<<"\nIncome:"<<endl;
     view(rec_I);
+    cout<<endl;
     break;
   case '5':
-    cout<<"Please input the month in the following format.\nYYYYMM";
+    cout<<"Please input the month in the following format.\nYYYYMM: ";
     cin>>report_month;
     report(rec_X,rec_I,report_month);
     break;
@@ -414,7 +464,10 @@ int main(){
     forecast(rec_X);
     break;
   case 'N':
-    cout<<"Bye!"<<endl;
+    cout<<"\nThank you for using the accounting system. Goodbye\n\n";
+    break;
+  case '8':
+    printmenu();
     break;
   default:
     cout<<"invalid input! Please input again!"<<endl;
