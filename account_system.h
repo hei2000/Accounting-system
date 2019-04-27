@@ -17,7 +17,7 @@ struct record{
   record * next;
 };
 
-//Return: current date in the form of YYYYMMDD
+//Output: return current date in the form of YYYYMMDD
 string getdate();
 //Function: print the date,amount,type and account of the given linked list pointer
 //Input: head of income/expense linked list pointer
@@ -30,12 +30,13 @@ string getdata(string name,record *& rec,string X_I);
 //Function: Login and check its password / create a new account
 //          If the user had a account already, get data from the corresponding file throught the function getdata()
 //Input: a string to store username, a string to store user's password, two empty record(struct) pointer to get data from different files
+//Output: return the password of the user account
 void login(string & name, string & password,record *& rec_X,record *& rec_I);
 //Function: print a menu to guide the user
 
 void printmenu();
-//Function: Find the position of record pointer just before the new data in chronological order
 //Input: Date of spending or earning,record pointer of linked list
+//Output: return a record pointer point just ranked before the new data in chronological order
 record * findpos(string date,record * rec);
 //Function: insert the data to the linked list after the record pointer "after"
 //Input: a record pointer points to the location before the date of spending/earning in chronological order
@@ -49,8 +50,17 @@ void print_format_I();
 //Input: pointer of the linked list to be added,to tell whether it is a expense/income linked list 1(expense)/2(income)
 void add(record *& rec,int XI);
 
+//Function: print the items containing the keyword.
+//Input: the keyword of item to be deleted, record pointer of linked list that stores the item to be deleted
+//       ,array of record pointer to store the location,two record pointer representing the head and tail
+//Output: an array of record pointer that stored the location of record pointer
 int print_ptr(string key, record * rec,record *ptr[],record * head,record * tail);
+//Function: delete the required item in the corresponding linked list
 void delete_rec(record * after,record *&rec,record * head,record * tail);
+//Function: print the items containing the keyword through the function print_ptr()
+//          ask the user the choose the one he wants to delete
+//          delete it through the function delete_rec()
+//Input: record pointer of linked list to be deleted, a string that tells whether it is a expense or income linked list
 void delete_(record *& rec,string XI);
 
 int sum_of_part_month(record * rec,string date);
