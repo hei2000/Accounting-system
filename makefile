@@ -1,5 +1,5 @@
 main.o:account_system.cpp main.cpp account_system.h
-	g++ -c main.cpp
+	g++ -c main.cpp account_system.cpp
 
 account_system:main.o
-	g++ main.o -o account_system
+	g++ main.o account_system.o -o account_system
