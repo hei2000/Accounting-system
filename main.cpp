@@ -9,13 +9,13 @@ using namespace std;
 #include "account_system.h"
 
 int main(){
-  record * rec_X = NULL;                                //dynamic memory management
-  record * rec_I = NULL;
+  record * rec_X = NULL;                                       //dynamic memory management
+  record * rec_I = NULL;                                       //Linked list
   string name=" ",password=" ";
   string report_month;
   char X_I;
   int budget=INT32_MAX;
-  login(name,password,rec_X,rec_I);
+  login(name,password,rec_X,rec_I);                           //Multi-user,get previos record if you created an account before
   char choice='0';
   cout << "Welcome to your accounting system!" << endl;
   while (choice!='N'){
@@ -62,14 +62,14 @@ int main(){
   case '5':
     cout<<"Please input the month in the following format.\nYYYYMM: ";
     cin>>report_month;
-    report(rec_X,rec_I,report_month);
+    report(rec_X,rec_I,report_month);                                     //output financial report of a particular month
     break;
   case '6':
     cout<<"Please input the budget of this month"<<endl;
     cin>>budget;
     break;
   case '7':
-    forecast(rec_X);
+    forecast(rec_X);                                                      //output the expected amount of expense in this month
     break;
   case 'N':
     cout<<"\nThank you for using the accounting system. Goodbye\n\n";
@@ -77,11 +77,11 @@ int main(){
   default:
     cout<<"invalid input! Please input again!"<<endl;
     }
-  check_budget(rec_X,budget);
+  check_budget(rec_X,budget);                                             //alert if the spending in this month exceed the budget they set
   }
-  savedata(rec_X,name,password,"X");                           //file output
-  savedata(rec_I,name,password,"I");
-  delete_all(rec_X);                    		   //avoid memory leakage
+  savedata(rec_X,name,password,"X");                                      //file output
+  savedata(rec_I,name,password,"I");                                      //save user's data
+  delete_all(rec_X);                    		                              //avoid memory leakage, destroy dynamic variables
   delete_all(rec_I);
   return 0;
   }
