@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <ctime>
-#include "account_system.h"
+using namespace std;
 
 struct record{
   string date;
