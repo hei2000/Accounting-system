@@ -103,7 +103,7 @@ Users then need to input their option (from '1' to '7', or 'N') to the system in
 After the system has received a valid input, the corresponding function will then be activated and users will proceed to the next steps. 
 
 ### 1: Add income and expenses records
-If the option entered is '1', this function will be activated and the system will ask whether the input records belong to income or expense with the following messsage:
+If the option entered is '1', this function will be activated and the system will ask whether the input records belong to income or expense with the following message:
 
 > 1: Expense
 >
@@ -184,8 +184,8 @@ Please be reminded that the amount entered can only be in integer form.
 ### 6: Set budget
 ### 7: Generate financial forecast
 
-## Compliation and Execution Instructions
-Before compling and executing the program, please download 'Makefile' and '______.cpp' to the same directory on your device. Make sure you have a complier installed on your device, for example, Terminal, before proceeding to the next steps.
+## Compilation and Execution Instructions
+Before compiling and executing the program, please download 'Makefile' and '______.cpp' to the same directory on your device. Make sure you have a complier installed on your device, for example, Terminal, before proceeding to the next steps.
 ### To compile the program
 In your complier, enter the following command:
 
