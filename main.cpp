@@ -16,10 +16,9 @@ int main(){
   char X_I;
   int budget=INT8_MAX;
   login(name,password,rec_X,rec_I);
-  printmenu();
-  char choice;
+  char choice='0;
   while (choice!='N'){
-  cout<<"\nEnter 8: View menu again\nEnter your option: ";
+  printmenu();
   cin>>choice;
   switch (choice){
   case '1':
@@ -73,9 +72,6 @@ int main(){
     break;
   case 'N':
     cout<<"\nThank you for using the accounting system. Goodbye\n\n";
-    break;
-  case '8':
-    printmenu();
     break;
   default:
     cout<<"invalid input! Please input again!"<<endl;
