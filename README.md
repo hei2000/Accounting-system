@@ -90,10 +90,10 @@ After successful log-ins, the menu will be immediately displayed in the below fo
 > 
 > N: Exit
 >
-> 
-> ********************************** 
 >
-> 
+> \**********************************
+>
+>
 > Enter your option:
 
 Users then need to input their option (from '1' to '7', or 'N') to the system in one single character. Characters other than the above eight options are not accepted and the system will prompt the user to enter their option again with the following message:
