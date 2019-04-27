@@ -157,17 +157,17 @@ If the chosen record type is expense (1), the following reminder will be display
 
 >> Please enter the short form for type and account.
 >>
->> Type: FD(Food),TS(Transportation),EN(Entertainment),UB(Utility Bills),OT(Others)
+>> Type: FD(Food), TS(Transportation), EN(Entertainment), UB(Utility Bills), OT(Others)
 >>
->> Account: CA(Cash),BC(Bank Card),OT(Others)
+>> Account: CA(Cash), BC(Bank Card), OT(Others)
 
 If the chosen record type is income (2), the following reminder will be displayed:
 
 >> Please enter the short form for type and account.
 >>
->> Type: FT(Full-time),PT(Part-time),OT(Others)
+>> Type: FT(Full-time), PT(Part-time), OT(Others)
 >>
->> Account: CA(Cash),BC(Bank Card),OT(Others)
+>> Account: CA(Cash), BC(Bank Card), OT(Others)
 
 Users now can input the records according the formats specified above. For example:
 
@@ -191,6 +191,44 @@ If option 'N' is entered, user will be brought back to the main menu after the f
 > Back to the menu
 
 ### 2: Delete records
+If the option entered is '2', this function will be activated and the system will ask whether the record to be deleted belongs to income or expense with the following message:
+
+> 1: Expense
+>
+> 2: Income
+>
+> Enter 1 or 2:
+
+Users then need to input either option '1' or '2'. Options other than these two are not accepted.
+
+After defining the income/expense type, the system will proceed to the next step to check if there are any existing records stored inside the system.
+
+If there are no records, the following message will be displayed and users will be then brought back to the main menu:
+
+> There is no (expense/income) record. Delete function is not available yet.
+
+But if there are records stored inside the system, the system will prompt the user to search for a certain record with the following message:
+
+> Please enter a key word for searching
+
+Users can then input their search keyword, which can be the date, amount, type or account. After inputting, the system will return the search results as below:
+
+> An example of searching for expense with keyword 'FD'
+>>
+>> 0: 20181010 10 FD CA
+>>
+>> 1: 20181215 500 FD BC
+>>
+>> 2: 20190420 65 FD OT
+>>
+>> Number you want to delete
+
+Then, user are required to select the record to be deleted by entering the corresponding number. For example, if '2' is entered, the record '20190420 65 FD OT' will then be deleted from the accounting system. This action is not reversible.
+
+However, if there are no results matching the entered keyword, the following message will be shown and users will be brought back to the main menu immediately:
+
+> Cannot find a record that matches the key word!
+
 ### 3: Edit records
 ### 4: View previous records
 ### 5: Generate statistical report
