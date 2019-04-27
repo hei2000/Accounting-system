@@ -63,9 +63,16 @@ void delete_rec(record * after,record *&rec,record * head,record * tail);
 //Input: record pointer of linked list to be deleted, a string that tells whether it is a expense or income linked list
 void delete_(record *& rec,string XI);
 
+//
 int sum_of_part_month(record * rec,string date);
+//Input: record pointer of income/expense linked list,type name,the required month
+//Output: the sum of not yet finish
 double sum_type(record * rec,string keyword,string month);
+//Input: record pointer of income/expense linked list,account name,the required month
 double sum_account(record * rec,string keyword,string month);
+//Function: print a financial report of the required month. It contains the month, monthly income, monthly expense,
+//          balance, percentage of each income type, income account, expense type, expense account spent in that month.
+//Input: the record pointers of income and expense linked list,the required month
 void report(record * rec_X,record * rec_I,string month);
 
 void check_budget(record * rec,int budget);
