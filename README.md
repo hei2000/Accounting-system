@@ -373,4 +373,4 @@ FD = Food, TS = Transportation, EN = Entertainment, UB = Utility Bills, OT = Oth
 FT = Full-time, PT = Part-time, OT = Others
 CA = Cash, BC = Bank Card, OT = Others
 
-External files to be imported must be stored in the same directory as the account_system program. Otherwise error may occur and the program may terminate automatically.
+External files to be imported must be stored in the same directory as the account_system program. Otherwise error may occur and the program may terminate automatically; all unsaved changes will be lost too.
