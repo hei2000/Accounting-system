@@ -211,7 +211,7 @@ But if there are records stored inside the system, the system will prompt the us
 
 > Please enter a key word for searching
 
-Users can then input their search keyword, which can be the date, amount, type or account. After inputting, the system will return the search results as below:
+Users can then input their search keyword, which can be the date, amount, type or account. There is no limitation for the searching keyword. After inputting, the system will return the search results sorted by date as below:
 
 > An example of searching for expense with keyword 'FD'
 >>
@@ -230,6 +230,30 @@ However, if there are no results matching the entered keyword, the following mes
 > Cannot find a record that matches the key word!
 
 ### 3: Edit records
+If the option entered is '3', this function will be activated and the system will ask whether the record to be edited belongs to income or expense with the following message:
+
+> 1: Expense
+>
+> 2: Income
+>
+> Enter 1 or 2:
+
+Users then need to input either option '1' or '2'. Options other than these two are not accepted.
+
+After defining the income/expense type, the system will proceed to the next step to check if there are any existing records stored inside the system.
+
+If there are no records, the following message will be displayed and users will be then brought back to the main menu:
+
+> There is no (expense/income) record. Edit function is not available yet.
+
+But if there are records stored inside the system, the system will prompt the user to search for the record they would like to edit with the following message:
+
+> Please enter a key word for searching
+
+Users can then input their search keyword, which can be the date, amount, type or account, to find and edit their record. There is no limitation for the searching keyword.
+
+For the next steps, please refer to the guide of 'Delete' and 'Add' respectively, since 'Edit' is an integrated function of 'Delete' and 'Add'.
+
 ### 4: View previous records
 ### 5: Generate statistical report
 ### 6: Set budget
