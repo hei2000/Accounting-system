@@ -17,6 +17,7 @@ int main(){
   int budget=INT8_MAX;
   login(name,password,rec_X,rec_I);
   char choice='0';
+  cout << "Welcome to your accounting system!" << endl;
   while (choice!='N'){
   printmenu();
   cin>>choice;
