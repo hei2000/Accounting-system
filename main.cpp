@@ -14,7 +14,7 @@ int main(){
   string name=" ",password=" ";
   string report_month;
   char X_I;
-  int budget=INT8_MAX;
+  int budget=INT32_MAX;
   login(name,password,rec_X,rec_I);
   char choice='0';
   cout << "Welcome to your accounting system!" << endl;
