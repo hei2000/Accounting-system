@@ -5,8 +5,8 @@
 #include <cstdlib>
 #include <iomanip>
 #include <ctime>
-#include "account_system.h"
 using namespace std;
+#include "account_system.h"
 
 int main(){
   record * rec_X = NULL;                                //dynamic memory management
