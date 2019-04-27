@@ -28,7 +28,7 @@ After new users have created a new account / existing users have successfully lo
 The following input guidelines must be strictly followed when using the program functions in order to generate outputs displayed in correct formats. 
 After executing the program, the system will prompt the user to log in to their accounts, or to create new accounts to use the service with the following message:
 
-<< Enter 1 to login
+<< Enter 1 to login\n
 << Enter 2 to create new account
 
 Users can only input either ‘1’ or ‘2’, then press ‘Enter’ to proceed to the next stage. Characters other than ‘1’ or ‘2’ are not accepted and message “Invalid input! Please enter again!” will be shown if they are entered. Users will be required to input their option again until their input is either ‘1’ or ‘2’.
