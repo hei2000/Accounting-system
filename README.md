@@ -1,4 +1,4 @@
-# Accounting-system
+# Accounting System
 To view this README.md properly, please download it to your device and view with a text editor.
 
 ## Problem Statement
@@ -25,7 +25,7 @@ After new users have created a new account / existing users have successfully lo
 7. to forecast the income and expenses for the next time period based on the previous financial records stored in the system.
 
 
-##  Input / Output Specifications
+## Input / Output Specifications
 The following input guidelines must be strictly followed when using the program functions in order to generate outputs displayed in correct formats. 
 After executing the program, the system will prompt the user to log in to their accounts, or to create new accounts to use the service with the following message:
 
