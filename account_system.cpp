@@ -194,6 +194,7 @@ void add(record *& rec,int XI){
       insert(after, input,rec);
     }
     fin.close();
+    cout << "Records are successfully imported." << endl;
   }
   else if (option == '2') {
     cout << "Please enter date, amount, type and account according to the format below." << endl;
@@ -204,6 +205,7 @@ void add(record *& rec,int XI){
     getline(cin,input);
     record * after = findpos(input.substr(0,8),rec);
     insert(after, input,rec);
+    cout << "Record is successfully added." << endl;
   }
 }
 
