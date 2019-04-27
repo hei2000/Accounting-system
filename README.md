@@ -341,6 +341,10 @@ make account_system
 
 The program should be successfully complied.
 
+You can also remove the temporary files with the following command:
+
+make clean
+
 ### To execute the program
 In your complier, enter the following command:
 
