@@ -17,9 +17,18 @@ struct record{
   record * next;
 };
 
+//Return: current date in the form of YYYYMMDD
 string getdate();
+//Function: print the date,amount,type and account of the given linked list pointer
+//Input: head of income/expense linked list pointer
 void view(record * rec);
+//Function: Open the corresponding user's file that stored previous record.
+//          Copy all data in the file to the corresponding linked list
+//Input: user name, income/expense linked list pointer, X(expense) or I(income)
 string getdata(string name,record *& rec,string X_I);
+//Function: Login and check its password / create a new account
+//          If the user had a account already, get data from the corresponding file throught the function getdata()
+//Input: a string to store username, a string to store user's password, two empty record(struct) pointer to get data from different files
 void login(string & name, string & password,record *& rec_X,record *& rec_I);
 void printmenu();
 record * findpos(string date,record * rec);
