@@ -98,8 +98,7 @@ void login(string & name, string & password,record *& rec_X,record *& rec_I){
   }
 
 void printmenu(){
-  cout << "Welcome to your accounting system!\n\n"
-    << "************** Menu **************\n\n"
+  cout << "************** Menu **************\n\n"
     << "1: Add income and expenses records\n"
     << "2: Delete records\n"
     << "3: Edit records\n"
